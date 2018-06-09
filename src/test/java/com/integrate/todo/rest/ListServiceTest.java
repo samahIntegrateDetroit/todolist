@@ -28,10 +28,11 @@ public class ListServiceTest {
 
         @Test
         public void createTodoList_savesToRepository() {
-
             int expectedID = 3;
             String expectedTitle = "Specific value";
+
             TodoList inputList = new TodoList().setTitle(expectedTitle);
+
             TodoList expectedTodoList = new TodoList()
                     .setTitle(expectedTitle).setListID(expectedID);
 
@@ -46,8 +47,8 @@ public class ListServiceTest {
             verify(db)
                     .createList(inputList);
 
-            assertThat(todoList)
-                    .isEqualTo(expectedTodoList);
+            assertThat(todoList.getListID())
+                    .isEqualTo(expectedID);
         }
 
         @Test
@@ -57,39 +58,17 @@ public class ListServiceTest {
                     .setTitle("")
                     .setListID(expectedListID);
 
-
             when(this.db.findListById(expectedListID))
                     .thenReturn(expected_list);
 
             TodoList list = this.service.getList(expectedListID);
 
-
             verify(this.db)
                     .findListById(expectedListID);
 
-            assertThat(list)
-                    .isEqualTo(expected_list);
+            assertThat(list.getListID())
+                    .isEqualTo(expectedListID);
         }
 
-        @Test
-        public void getList_whenDoesNotExist_returnsEmptyList() {
-            int expectedListID = 4;
-            TodoList expectedList = new TodoList()
-                    .setTitle("")
-                    .setListID(-1);
-
-
-            when(db.findListById(expectedListID))
-                    .thenReturn(expectedList);
-
-            TodoList returnedList = this.service.getList(expectedListID);
-
-
-            verify(this.db)
-                    .findListById(expectedListID);
-
-            assertThat(returnedList)
-                    .isEqualTo(expectedList);
-        }
     }
 

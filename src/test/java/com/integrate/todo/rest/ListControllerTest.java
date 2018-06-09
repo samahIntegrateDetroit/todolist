@@ -22,12 +22,10 @@ public class ListControllerTest {
 
         when( mockService.createTodoList( todoListPassedIn ) )
                 .thenReturn( expectedTodoList );
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.CREATED);
 
         ResponseEntity<TodoList> responseEntity = todoListController.createList( todoListPassedIn );
-        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
-                expectedTodoList,
-                HttpStatus.CREATED
-        );
 
 
         verify( mockService )
@@ -39,19 +37,20 @@ public class ListControllerTest {
 
     @Test
     public void getList_returnsListAndHttpStatus200() {
+
+
         ListService mockService = mock( ListService.class );
         ListController todoListController = new ListController( mockService );
 
         TodoList expectedTodoList = new TodoList().setListID( 1 );
 
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.OK);
+
         when( mockService.getList( 1 ) )
                 .thenReturn( expectedTodoList );
 
         ResponseEntity<TodoList> resultList = todoListController.readList(1);
-        ResponseEntity expectedResponse = new ResponseEntity<>(
-                expectedTodoList,
-                HttpStatus.OK
-        );
 
 
         verify( mockService )
@@ -69,16 +68,15 @@ public class ListControllerTest {
         TodoList expectedTodoList = new TodoList().setListID( -1 );
         int input_id = 8;
 
-
         when( mockService.getList( input_id ) )
                 .thenReturn( expectedTodoList );
 
-        ResponseEntity<TodoList> resultList = todoListController.readList( input_id );
         ResponseEntity expectedResponse = new ResponseEntity<>(
                 expectedTodoList,
                 HttpStatus.NO_CONTENT
         );
 
+        ResponseEntity<TodoList> resultList = todoListController.readList( input_id );
 
         verify( mockService )
                 .getList( input_id );
