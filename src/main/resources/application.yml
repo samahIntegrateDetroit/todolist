@@ -1,0 +1,18 @@
+###
+#   Database Settings
+###
+spring:
+  datasource:
+    url: jdbc:sqlite:todo.db
+    username: sa
+    password:
+    driverClassName: org.sqlite.JDBC
+  jpa:
+    database-platform: com.integrate.todo.db.SQLiteDialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+          hibernate:
+            show_sql: true
+            use_sql_comments: true
+            format_sql: true
