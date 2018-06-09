@@ -38,7 +38,9 @@ public class ListController {
 
         @PutMapping
         public @ResponseBody
-        TodoList updateList() { return null; }
+        ResponseEntity<TodoList> updateList(@RequestBody int id, @RequestBody String updatedTitle) {
+            return new ResponseEntity<>(this.service.updateList(id, updatedTitle), HttpStatus.OK);
+        }
 
         @DeleteMapping
         public void deleteList() {

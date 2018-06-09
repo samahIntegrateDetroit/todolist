@@ -3,6 +3,7 @@ package com.integrate.todo.rest;
 import com.integrate.todo.TodoList;
 import com.integrate.todo.db.DBWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +26,10 @@ public class ListService {
         }
 
 
+        public TodoList updateList(int i, String newTitle) {
+            return null;
     }
+}
 
 
 

@@ -84,4 +84,27 @@ public class ListControllerTest {
         assertThat( resultList )
                 .isEqualTo( expectedResponse );
     }
+
+    @Test
+    public void updateListTitle_updatesListTitle_returnsHttpStatus200() {
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController(mockService);
+        String newTitle = "New Title";
+        int listID = 1;
+        TodoList todoList = new TodoList().setTitle(newTitle).setListID(listID);
+
+        when (mockService.updateList(listID, newTitle))
+                .thenReturn( todoList );
+
+
+        ResponseEntity<TodoList> responseEntity = todoListController.updateList(listID,newTitle);
+        TodoList body = responseEntity.getBody();
+
+        verify(mockService).updateList(listID, newTitle);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(body.getTitle()).isEqualTo(newTitle);
+        assertThat(body.getListID()).isEqualTo(listID);
+
+    }
 }
