@@ -7,7 +7,6 @@ public class User {
     private Integer userId;
     private String firstName;
     private String lastName;
-    private String userName;
     private String eMail;
     private String passwordHash;
     private String signupDate;
@@ -22,7 +21,6 @@ public class User {
         return Objects.equals(userId, user.userId) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
-                Objects.equals(userName, user.userName) &&
                 Objects.equals(eMail, user.eMail) &&
                 Objects.equals(passwordHash, user.passwordHash) &&
                 Objects.equals(signupDate, user.signupDate) &&
@@ -32,7 +30,7 @@ public class User {
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, firstName, lastName, userName, eMail, passwordHash, signupDate, preference);
+        return Objects.hash(userId, firstName, lastName, eMail, passwordHash, signupDate, preference);
     }
 
     public Integer getUserId() {
@@ -57,14 +55,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String geteMail() {
@@ -99,11 +89,10 @@ public class User {
         this.preference = preference;
     }
 
-    public User setUser(String firstName, String lastName, String userName, String eMail, String passwordHash, String signupDate, int preference) {
+    public User setUser(String firstName, String lastName, String eMail, String passwordHash, String signupDate, int preference) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setUserName(userName);
         user.seteMail(eMail);
         user.setPasswordHash(passwordHash);
         user.setSignupDate(signupDate);

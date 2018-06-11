@@ -31,22 +31,21 @@ public class UserServiceTest {
         int expectedID = 1;
         String expectedFirstName = "Zaara";
         String expectedLastName = "Userson";
-        String expectedUserName = "Zaara0001";
         String expectedEmail = "zaara0001@example.com";
         String expectedPasswordHash = "password";
         String expectedSignupDate = "6/9/2018";
         int expectedPreference = 0;
 
-        User inputUser = new User().setUser(expectedFirstName,expectedLastName,expectedUserName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
+        User inputUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference);
 
         User expectedUser = new User()
-                .setUser(expectedFirstName,expectedLastName,expectedUserName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
+                .setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference);
 
         when(this.db.createUser(inputUser))
                 .thenReturn(expectedUser);
 
         User user = this.service.createUser(
-                new User().setUser(expectedFirstName,expectedLastName,expectedUserName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference));
+                new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference));
 
 
         verify(db)
@@ -61,13 +60,11 @@ public class UserServiceTest {
         int expectedUserID = 1;
         String expectedFirstName = "Zaara";
         String expectedLastName = "Userson";
-        String expectedUserName = "Zaara0001";
         String expectedEmail = "zaara0001@example.com";
         String expectedPasswordHash = "password";
         String expectedSignupDate = "6/9/2018";
         int expectedPreference = 0;
-        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedUserName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
-
+        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
 
         when(this.db.findUserById(expectedUserID))
                 .thenReturn(expectedUser);
@@ -81,4 +78,26 @@ public class UserServiceTest {
                 .isEqualTo(user);
     }
 
+    @Test
+    public void getUserByEmail_returnsUserWithCorrectID() {
+        int expectedUserID = 1;
+        String expectedFirstName = "Zaara";
+        String expectedLastName = "Userson";
+        String expectedEmail = "zaara0001@example.com";
+        String expectedPasswordHash = "password";
+        String expectedSignupDate = "6/9/2018";
+        int expectedPreference = 0;
+        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
+
+        when(this.db.findUserByEmail(expectedEmail))
+                .thenReturn(expectedUser);
+
+        User user = this.service.getUserByEmail(expectedEmail);
+
+        verify(this.db)
+                .findUserByEmail(expectedEmail);
+
+        assertThat(expectedUser)
+                .isEqualTo(user);
+    }
 }

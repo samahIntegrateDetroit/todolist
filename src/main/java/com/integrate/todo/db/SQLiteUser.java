@@ -23,7 +23,6 @@ public class SQLiteUser implements DBWrapperUser{
 
         String firstName=user.getFirstName();
         String lastName=user.getLastName();
-        String userName=user.getUserName();
         String eMail=user.geteMail();
         String passwordHash=user.getPasswordHash();
         String signupDate=user.getSignupDate();
@@ -35,13 +34,11 @@ public class SQLiteUser implements DBWrapperUser{
                     "INSERT INTO User (" +
                             "FIRST_NAME," +
                             "LAST_NAME," +
-                            "USER_NAME," +
                             "EMAIL," +
                             "PASSWORD_HASH," +
                             "SIGNUP_DATE," +
                             "PREFERENCE) VALUES ('"+firstName+","+
                             lastName+","+
-                            userName+","+
                             eMail+","+
                             passwordHash+","+
                             signupDate+","+
@@ -77,7 +74,6 @@ public class SQLiteUser implements DBWrapperUser{
                 user.setUserId( resultSet.getInt( "ID" ) );
                 user.setFirstName( resultSet.getString( "FIRST_NAME" ) );
                 user.setLastName( resultSet.getString( "LAST_NAME" ) );
-                user.setUserName( resultSet.getString( "USER_NAME" ) );
                 user.seteMail( resultSet.getString( "EMAIL" ) );
                 user.setPasswordHash( resultSet.getString( "PASSWORD_HASH" ) );
                 user.setSignupDate( resultSet.getString( "SIGNUP_DATE" ) );
@@ -90,5 +86,9 @@ public class SQLiteUser implements DBWrapperUser{
         user.setUserId( -1 );
 
         return user;
+    }
+
+    public User findUserByEmail(String expectedEmail) {
+        return null;
     }
 }

@@ -16,7 +16,6 @@ public class UserService {
         this.database = database;
     }
 
-
     public User getUser(Integer id) {
         return database.findUserById(id);
     }
@@ -25,5 +24,7 @@ public class UserService {
         return database.createUser(user);
     }
 
-
+    public User getUserByEmail(String email) {
+        return database.findUserByEmail(email);
+    }
 }
