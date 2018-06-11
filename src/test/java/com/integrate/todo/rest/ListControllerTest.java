@@ -44,13 +44,14 @@ public class ListControllerTest {
 
         TodoList expectedTodoList = new TodoList().setListID( 1 );
 
-        ResponseEntity expectedResponse = new ResponseEntity<>(
-                expectedTodoList, HttpStatus.OK);
-
         when( mockService.getList( 1 ) )
                 .thenReturn( expectedTodoList );
 
         ResponseEntity<TodoList> resultList = todoListController.readList(1);
+        ResponseEntity expectedResponse = new ResponseEntity<>( // compare what I an getting back to what I expect
+                expectedTodoList,
+                HttpStatus.OK
+        );
 
 
         verify( mockService )
@@ -77,6 +78,7 @@ public class ListControllerTest {
         );
 
         ResponseEntity<TodoList> resultList = todoListController.readList( input_id );
+
 
         verify( mockService )
                 .getList( input_id );
