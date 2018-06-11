@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class SQLiteList implements DBWrapper{
+public class SQLiteList implements DBWrapperList {
 
     @Autowired
     DataSource dataSource;
