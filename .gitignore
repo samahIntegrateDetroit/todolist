@@ -1,5 +1,5 @@
 .gradle
-.db
+*.db
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
