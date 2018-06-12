@@ -43,11 +43,10 @@ public class FolderServiceTest {
                 new FolderList().setTitle(expectedTitle)
         );
 
-
         verify(this.db)
                 .createFolderList(inputList);
 
-        assertThat(FolderList.getFolderID())
+        assertThat(folderList.getFolderID())
                 .isEqualTo(expectedID);
     }
 
