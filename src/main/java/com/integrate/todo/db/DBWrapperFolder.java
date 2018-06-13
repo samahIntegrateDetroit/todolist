@@ -1,6 +1,7 @@
 package com.integrate.todo.db;
 
 import com.integrate.todo.FolderList;
+import com.integrate.todo.db.SQLiteFolder;
 
 public interface DBWrapperFolder {
 

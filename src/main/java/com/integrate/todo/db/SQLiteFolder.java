@@ -2,6 +2,7 @@ package com.integrate.todo.db;
 
 import com.integrate.todo.FolderList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.sqlite.core.DB;
 
 import javax.sql.DataSource;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@Component
 public class SQLiteFolder implements DBWrapperFolder {
 
     @Autowired
