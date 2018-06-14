@@ -2,7 +2,7 @@ package com.integrate.todo.db;
 
 import com.integrate.todo.TodoList;
 
-public interface DBWrapper {
+public interface DBWrapperList {
 
     public TodoList createList(TodoList todoList);
 

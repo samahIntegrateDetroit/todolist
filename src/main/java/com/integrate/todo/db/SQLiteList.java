@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class SQLiteList implements DBWrapper{
+public class SQLiteList implements DBWrapperList {
 
     @Autowired
     DataSource dataSource;
@@ -56,6 +56,7 @@ public class SQLiteList implements DBWrapper{
                 todoList.setListID( resultSet.getInt( "ID" ) );
                 todoList.setTitle( resultSet.getString( "LIST_NAME" ) );
             }
+            connection.close();
             return todoList;
         } catch( SQLException e ) { e.printStackTrace(); }
 
