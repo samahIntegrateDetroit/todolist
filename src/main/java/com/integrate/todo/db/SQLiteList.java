@@ -56,6 +56,7 @@ public class SQLiteList implements DBWrapper{
                 todoList.setListID( resultSet.getInt( "ID" ) );
                 todoList.setTitle( resultSet.getString( "LIST_NAME" ) );
             }
+            connection.close();
             return todoList;
         } catch( SQLException e ) { e.printStackTrace(); }
 

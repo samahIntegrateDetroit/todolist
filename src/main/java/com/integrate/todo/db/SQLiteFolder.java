@@ -24,7 +24,7 @@ public class SQLiteFolder implements DBWrapperFolder {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "INSERT INTO List (LIST_NAME) VALUES ('" + folderListTitle + "')"
+                    "INSERT INTO Folder (FOLDER_NAME) VALUES ('" +folderListTitle+ "')"
             );
             statement.close();
             statement = connection.createStatement();
@@ -47,13 +47,13 @@ public class SQLiteFolder implements DBWrapperFolder {
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * from List WHERE ID=" + id + ";");
+            ResultSet resultSet = statement.executeQuery("SELECT * from Folder WHERE ID=" + id + ";");
 
             if (resultSet.next() == false) {
                 folderList.setFolderID(-1);
             } else {
                 folderList.setFolderID(resultSet.getInt("ID"));
-                folderList.setTitle(resultSet.getString("LIST_NAME"));
+                folderList.setTitle(resultSet.getString("FOLDER_NAME"));
             }
             return folderList;
         } catch (SQLException e) {
