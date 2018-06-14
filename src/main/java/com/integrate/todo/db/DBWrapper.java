@@ -7,4 +7,6 @@ public interface DBWrapper {
     public TodoList createList(TodoList todoList);
 
     TodoList findListById(int id);
+
+    TodoList updateListTitle(int id, String newTitle);
 }

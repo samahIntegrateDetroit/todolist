@@ -56,11 +56,33 @@ public class SQLiteList implements DBWrapper{
                 todoList.setListID( resultSet.getInt( "ID" ) );
                 todoList.setTitle( resultSet.getString( "LIST_NAME" ) );
             }
+            connection.close();
             return todoList;
         } catch( SQLException e ) { e.printStackTrace(); }
 
         todoList.setListID( -1 );
 
         return todoList;
+    }
+
+    @Override
+    public TodoList updateListTitle(int id, String newTitle) {
+        TodoList todoList = new TodoList();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "UPDATE List SET LIST_NAME = newTitle WHERE ID = id;"
+            );
+            statement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        todoList.setListID(-1);
+        return todoList;
+
+
     }
 }

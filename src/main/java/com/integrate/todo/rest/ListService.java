@@ -26,8 +26,8 @@ public class ListService {
         }
 
 
-        public TodoList updateList(int i, String newTitle) {
-            return null;
+        public TodoList updateList(int id, String newTitle) {
+            return database.updateListTitle(id, newTitle);
     }
 }
 
