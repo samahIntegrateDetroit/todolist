@@ -1,0 +1,15 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "e2e tests for todoList",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "integrate detroit",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^3.9.4",
+    "npm": "^6.1.0"
+  }
+}
