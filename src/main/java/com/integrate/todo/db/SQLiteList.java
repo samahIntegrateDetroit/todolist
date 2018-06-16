@@ -64,4 +64,30 @@ public class SQLiteList implements DBWrapperList {
 
         return todoList;
     }
+
+    @Override
+    public TodoList updateListTitle(int id, String newTitle) {
+        TodoList todoList = new TodoList();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + id + ";"
+            );
+            statement.close();
+            todoList.setTitle(newTitle);
+            todoList.setListID(id);
+            return todoList;
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        todoList.setTitle("");
+        todoList.setListID(-1);
+        return todoList;
+
+
+    }
 }

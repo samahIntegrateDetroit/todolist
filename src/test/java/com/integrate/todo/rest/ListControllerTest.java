@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.HashMap;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -89,15 +91,21 @@ public class ListControllerTest {
     public void updateListTitle_updatesListTitle_returnsHttpStatus200() {
         ListService mockService = mock( ListService.class );
         ListController todoListController = new ListController(mockService);
+        HashMap<String, Object> hashMap = new HashMap<>();
         String newTitle = "New Title";
         int listID = 1;
+        hashMap.put("id", listID);
+        hashMap.put("updatedTitle", newTitle);
         TodoList todoList = new TodoList().setTitle(newTitle).setListID(listID);
+
+        when (mockService.getList(listID))
+                .thenReturn( todoList );
 
         when (mockService.updateList(listID, newTitle))
                 .thenReturn( todoList );
 
 
-        ResponseEntity<TodoList> responseEntity = todoListController.updateList(listID,newTitle);
+        ResponseEntity<TodoList> responseEntity = todoListController.updateList(hashMap);
         TodoList body = responseEntity.getBody();
 
         verify(mockService).updateList(listID, newTitle);
@@ -105,6 +113,32 @@ public class ListControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(body.getTitle()).isEqualTo(newTitle);
         assertThat(body.getListID()).isEqualTo(listID);
+
+    }
+
+    @Test
+    public void updateListTitle_DoesNOTupdateListTitle_returnsHttpStatus304(){
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController(mockService);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        String newTitle = "";
+        int listIDToReturn = -1;
+        int listIDToPassIn = 5;
+        hashMap.put("id", listIDToPassIn);
+        hashMap.put("updatedTitle", "Hello!");
+        TodoList todoList = new TodoList().setTitle(newTitle).setListID(listIDToReturn);
+
+        when (mockService.getList(listIDToPassIn))
+                .thenReturn( todoList );
+
+        ResponseEntity<TodoList> responseEntity = todoListController.updateList(hashMap);
+        TodoList body = responseEntity.getBody();
+
+        verify(mockService).getList(listIDToPassIn);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_MODIFIED);
+        assertThat(body.getListID()).isEqualTo(listIDToReturn);
 
     }
 }

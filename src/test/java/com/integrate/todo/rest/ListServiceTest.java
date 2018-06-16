@@ -70,5 +70,7 @@ public class ListServiceTest {
                     .isEqualTo(expectedListID);
         }
 
+        //TODO Write test for update list
+
     }
 
