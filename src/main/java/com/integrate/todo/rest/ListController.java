@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.ls.LSException;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/list")
 public class ListController {
@@ -38,8 +40,8 @@ public class ListController {
 
         @PutMapping
         public @ResponseBody
-        ResponseEntity<TodoList> updateList(@RequestBody Integer id, @RequestBody String updatedTitle) {
-            return new ResponseEntity<>(this.service.updateList(id, updatedTitle), HttpStatus.OK);
+        ResponseEntity<TodoList> updateList(@RequestBody Map<String, Object> newTitle) {
+            return new ResponseEntity<>(this.service.updateList((int) newTitle.get("id"), newTitle.get("updatedTitle").toString()), HttpStatus.OK);
         }
 
         @DeleteMapping
