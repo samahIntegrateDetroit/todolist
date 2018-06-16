@@ -1,0 +1,11 @@
+echo "Building and running tests"
+gradle build
+
+echo "Tests passed. Running postman tests"
+gradle bootRun &
+pid=$!
+
+sleep 7
+
+cd e2e
+node test-runner.js todo local
