@@ -164,5 +164,6 @@ target/
 
 # End of https://www.gitignore.io/api/java,intellij,java-web,intellij+iml
 
-.idea
-todo.db
+# e2e test
+e2e/node_modules/
+e2e/package-lock.json
