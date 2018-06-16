@@ -41,6 +41,9 @@ public class ListController {
         @PutMapping
         public @ResponseBody
         ResponseEntity<TodoList> updateList(@RequestBody Map<String, Object> newTitle) {
+            TodoList list = this.service.getList( (int) newTitle.get("id") );
+            if(list.getListID() == -1 )
+                return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
             return new ResponseEntity<>(this.service.updateList((int) newTitle.get("id"), newTitle.get("updatedTitle").toString()), HttpStatus.OK);
         }
 

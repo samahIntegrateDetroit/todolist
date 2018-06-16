@@ -1,14 +1,58 @@
 {
 	"info": {
-		"_postman_id": "c9ae54bb-6801-4ef7-af2c-cf875f2596d3",
+		"_postman_id": "ca50f7b0-e12d-4cea-b33a-711794acfac6",
 		"name": "17 _Update List Title",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Update List Title",
-			"description": "",
+			"description": null,
 			"item": [
+				{
+					"name": "Not Updated List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "900405fa-4769-42fc-b372-6d2dadf9d3e6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 304\", function () {",
+									"    pm.response.to.have.status(304);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\",\n  \"id\": {{id}}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Create List",
 					"event": [
@@ -72,7 +116,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e14e36e5-189d-4d85-ab6a-4b387e097359",
+								"id": "35d58b05-d0b6-46b6-b662-290509bd5672",
 								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
@@ -86,6 +130,7 @@
 									"    pm.expect(jsonData.title).to.equal(updatedTitle);",
 									"    pm.expect(jsonData.listID).to.equal(parseInt(id));",
 									"});",
+									"",
 									""
 								]
 							}
