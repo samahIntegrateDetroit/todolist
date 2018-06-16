@@ -163,3 +163,6 @@ target/
 
 
 # End of https://www.gitignore.io/api/java,intellij,java-web,intellij+iml
+
+.idea
+todo.db
