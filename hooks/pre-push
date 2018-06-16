@@ -1,0 +1,24 @@
+echo "Building and running tests"
+gradle build
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Aborting push"
+  exit 1
+fi
+
+# TODO - MAKE THIS WORK - NDUBETZ 2018/06/15
+# echo "Tests passed. Running postman tests"
+# gradle bootRun & >/dev/null
+# pid=$!
+
+# sleep 5
+
+# cd e2e
+# thing=$(node test-runner.js todo local)
+# echo "Thing "$thing
+# tests_pass=$!
+# echo "DID I MAKE IT??"
+# kill $pid
+# if [ $tests_pass -ne 0 ]; then
+#   echo "e2e tests failed!! no git push for you!!"
+#   exit $tests_pass
+# fi
