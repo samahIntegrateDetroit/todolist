@@ -23,7 +23,7 @@ newman.run(runConfig, (err, summary, run) => {
   }
   if (summary.run.failures) {
     console.log("FAILURE", summary.run.failures);
-    throw new Error("Tests failed!!");
+    process.exit(1);
   }
 });
 
