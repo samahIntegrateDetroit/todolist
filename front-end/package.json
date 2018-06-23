@@ -1,0 +1,16 @@
+{
+  "name": "to-do",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "live-server . --port=9876",
+    "test": ""
+  },
+  "author": "integrate-detroit",
+  "license": "ISC",
+  "devDependencies": {
+    "npm": "^6.1.0",
+    "live-server": "^1.2.0"
+  }
+}
