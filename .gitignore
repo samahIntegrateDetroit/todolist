@@ -3,6 +3,7 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 /front-end/node_modules/
+/test/package-lock.json
 ### STS ###
 .apt_generated
 .classpath
