@@ -2,7 +2,7 @@
 *.db
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-/node_modules/
+/front-end/node_modules/
 ### STS ###
 .apt_generated
 .classpath
