@@ -38,13 +38,16 @@ public class ListController {
             return new ResponseEntity<>( list, HttpStatus.OK );
         }
 
-        @PutMapping
+        @PutMapping("/{id}")
         public @ResponseBody
-        ResponseEntity<TodoList> updateList(@RequestBody Map<String, Object> newTitle) {
-            TodoList list = this.service.getList( (int) newTitle.get("id") );
+        ResponseEntity<TodoList> updateList(
+            @PathVariable Integer id,
+            @RequestBody Map<String, Object> newTitle
+        ) {
+            TodoList list = this.service.getList( id );
             if(list.getListID() == -1 )
-                return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
-            return new ResponseEntity<>(this.service.updateList(list, newTitle.get("updatedTitle").toString()), HttpStatus.OK);
+                return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED );
+            return new ResponseEntity<>(this.service.updateList(id, newTitle.get("updatedTitle").toString()), HttpStatus.OK);
         }
 
         @DeleteMapping

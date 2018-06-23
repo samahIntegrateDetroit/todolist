@@ -105,7 +105,7 @@ public class ListControllerTest {
                 .thenReturn( todoList );
 
 
-        ResponseEntity<TodoList> responseEntity = todoListController.updateList(hashMap);
+        ResponseEntity<TodoList> responseEntity = todoListController.updateList(listID, hashMap);
         TodoList body = responseEntity.getBody();
 
         verify(mockService).updateList(todoList, newTitle);
@@ -132,7 +132,7 @@ public class ListControllerTest {
         when (mockService.getList(listIDToPassIn))
                 .thenReturn( todoList );
 
-        ResponseEntity<TodoList> responseEntity = todoListController.updateList(hashMap);
+        ResponseEntity<TodoList> responseEntity = todoListController.updateList(listIDToPassIn, hashMap);
         TodoList body = responseEntity.getBody();
 
         verify(mockService).getList(listIDToPassIn);
