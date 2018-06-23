@@ -101,14 +101,14 @@ public class ListControllerTest {
         when (mockService.getList(listID))
                 .thenReturn( todoList );
 
-        when (mockService.updateList(todoList, newTitle))
+        when (mockService.updateList(listID, newTitle))
                 .thenReturn( todoList );
 
 
         ResponseEntity<TodoList> responseEntity = todoListController.updateList(listID, hashMap);
         TodoList body = responseEntity.getBody();
 
-        verify(mockService).updateList(todoList, newTitle);
+        verify(mockService).updateList(listID, newTitle);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(body.getTitle()).isEqualTo(newTitle);

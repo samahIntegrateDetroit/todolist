@@ -25,8 +25,8 @@ public class ListService {
         }
 
 
-        public TodoList updateList(TodoList todoList, String newTitle) {
-            return database.updateListTitle(todoList, newTitle);
+        public TodoList updateList(Integer listID, String newTitle) {
+            return database.updateListTitle(listID, newTitle);
     }
 
         public TodoList archiveList(TodoList todoList) {

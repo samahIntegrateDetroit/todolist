@@ -69,14 +69,13 @@ public class SQLiteList implements DBWrapperList {
     }
 
     @Override
-    public TodoList updateListTitle(TodoList todoList, String newTitle) {
-        int listId = todoList.getListID();
-
+    public TodoList updateListTitle(Integer listID, String newTitle) {
+        TodoList todoList = this.findListById(listID);
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + listId + ";"
+                    "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + listID + ";"
             );
             statement.close();
             todoList.setTitle(newTitle);

@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "9f0bd4d9-c3e5-49f3-a612-63eba86b4873",
+		"name": "ArchiveList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "85105898-95eb-4be0-98bf-0c9146be0086",
+						"type": "text/javascript",
+						"exec": [
+							"var _ = require(\"lodash\");",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Has properties\", function () {",
+							"    var expectedTitle = pm.environment.get(\"title\");",
+							"    var expectedUserID = pm.environment.get(\"userID\");",
+							"    var expectedArchiveStatus = pm.environment.get(\"archiveStatusNo\");",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.equal(expectedTitle);",
+							"    //pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
+							"    //pm.expect(jsonData.archiveStatusNo).to.equal(expectedArchiveStatus);",
+							"    //pm.expect(_.has(jsonData, \"listID\")).true;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userID\": \"{{userID}}\",\n  \"title\": \"{{title}}\",\n  \"archiveStatus\": \"{{archiveStatusNo}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ArchiveList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "856fc641-068c-4ace-bbb3-a7e05cdd0125",
+						"type": "text/javascript",
+						"exec": [
+							"var _ = require(\"lodash\");",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Has properties\", function () {",
+							"    var expectedTitle = pm.environment.get(\"title\");",
+							"    var expectedUserID = pm.environment.get(\"userID\");",
+							"    var expectedArchiveStatus = pm.environment.get(\"archiveStatusYes\");",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.equal(expectedTitle);",
+							"    pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
+							"    pm.expect(jsonData.archiveStatus).to.equal(expectedArchiveStatus);",
+							"    pm.expect(_.has(jsonData, \"listID\")).true;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/list/archive/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list",
+						"archive",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ArchiveListThatDoesNotExist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d53801f-9eda-49c4-961d-c35fa3ac4d06",
+						"type": "text/javascript",
+						"exec": [
+							"var _ = require(\"lodash\");",
+							"",
+							"pm.test(\"Status code is 304\", function () {",
+							"    pm.response.to.have.status(304);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/list/archive/2000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list",
+						"archive",
+						"2000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
