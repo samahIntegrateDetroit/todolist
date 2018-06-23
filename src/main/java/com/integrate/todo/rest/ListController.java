@@ -9,6 +9,7 @@ import org.w3c.dom.ls.LSException;
 
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/list")
 public class ListController {
@@ -19,7 +20,6 @@ public class ListController {
             this.service = service;
         }
 
-        @CrossOrigin(origins = "http://localhost:9876")
         @PostMapping
         public @ResponseBody
         ResponseEntity<TodoList> createList(@RequestBody TodoList todoList) {
@@ -44,7 +44,7 @@ public class ListController {
             TodoList list = this.service.getList( (int) newTitle.get("id") );
             if(list.getListID() == -1 )
                 return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
-            return new ResponseEntity<>(this.service.updateList((int) newTitle.get("id"), newTitle.get("updatedTitle").toString()), HttpStatus.OK);
+            return new ResponseEntity<>(this.service.updateList(list, newTitle.get("updatedTitle").toString()), HttpStatus.OK);
         }
 
         @DeleteMapping
@@ -52,5 +52,12 @@ public class ListController {
 
         }
 
-
+        @PutMapping("archive/{listID}")
+        public @ResponseBody
+        ResponseEntity<TodoList> archiveList(@PathVariable Integer listID) {
+            TodoList list = this.service.getList(listID);
+            if(list.getListID() == -1 )
+                return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(this.service.archiveList(list), HttpStatus.OK);
+        }
 }

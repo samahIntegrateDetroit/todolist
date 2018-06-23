@@ -101,14 +101,14 @@ public class ListControllerTest {
         when (mockService.getList(listID))
                 .thenReturn( todoList );
 
-        when (mockService.updateList(listID, newTitle))
+        when (mockService.updateList(todoList, newTitle))
                 .thenReturn( todoList );
 
 
         ResponseEntity<TodoList> responseEntity = todoListController.updateList(hashMap);
         TodoList body = responseEntity.getBody();
 
-        verify(mockService).updateList(listID, newTitle);
+        verify(mockService).updateList(todoList, newTitle);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(body.getTitle()).isEqualTo(newTitle);
@@ -140,5 +140,73 @@ public class ListControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_MODIFIED);
         assertThat(body.getListID()).isEqualTo(listIDToReturn);
 
+    }
+
+    @Test
+    public void archiveList_returnsArchivedListAndHttpStatus200() {
+        int expectedListID = 1;
+        int expectedUserID = 4;
+        String expectedTitle = "Specific value";
+        String expectedArchiveStatus = "Y";
+
+        int listIDToPassIn = 1;
+
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        TodoList expectedTodoList = new TodoList()
+                .setListID(expectedListID)
+                .setUserID(expectedUserID)
+                .setTitle(expectedTitle)
+                .setArchiveStatus(expectedArchiveStatus);
+
+        TodoList inputList = new TodoList()
+                .setListID(expectedListID)
+                .setUserID(expectedUserID)
+                .setTitle(expectedTitle)
+                .setArchiveStatus("");
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.OK);
+
+        when( mockService.getList(listIDToPassIn) )
+                .thenReturn( inputList );
+
+        when( mockService.archiveList(inputList ) )
+                .thenReturn( expectedTodoList );
+
+        ResponseEntity<TodoList> resultList = todoListController.archiveList(listIDToPassIn);
+
+        verify( mockService )
+                .archiveList(inputList );
+
+        assertThat( resultList )
+                .isEqualTo( expectedResponse );
+    }
+
+    @Test
+    public void archiveList_whenListDoesntExist_DoesNotUpdateArchiveStatus_returnsHttpStatus304(){
+        int expectedListID = -1;
+        int listIDToPassIn = 5;
+
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        TodoList expectedTodoList = new TodoList()
+                .setListID(expectedListID);
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.NOT_MODIFIED);
+
+        when( mockService.getList(listIDToPassIn) )
+                .thenReturn( expectedTodoList );
+
+        ResponseEntity<TodoList> resultList = todoListController.archiveList(listIDToPassIn);
+
+        verify( mockService )
+                .getList(listIDToPassIn );
+
+        assertThat( resultList )
+                .isEqualTo( expectedResponse );
     }
 }

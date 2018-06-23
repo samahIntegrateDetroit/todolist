@@ -14,17 +14,24 @@ public class UserControllerTest {
         UserService mockService = mock( UserService.class );
         UserController userController = new UserController(mockService);
 
+        String testEmail = null;
+
         User expectedUser = new User();
         User userPassedIn = new User();
 
+        User testUser = new User();
+        testUser.setUserID(-1);
 
         when( mockService.createUser( userPassedIn ) )
                 .thenReturn( expectedUser );
+
+        when( mockService.getUserByEmail(testEmail) )
+                .thenReturn( testUser );
+
         ResponseEntity expectedResponseEntity = new ResponseEntity<>(
                 expectedUser, HttpStatus.CREATED);
 
         ResponseEntity<User> responseEntity = userController.createUser( userPassedIn );
-
 
         verify( mockService )
                 .createUser( userPassedIn );
@@ -111,6 +118,35 @@ public class UserControllerTest {
 
         assertThat( resultUser )
                 .isEqualTo( expectedResponse );
+    }
+
+    @Test
+    public void createUser_returnsHttpStatusBadRequestIfUserAlreadyExists(){
+        UserService mockService = mock( UserService.class );
+        UserController userController = new UserController(mockService);
+
+        String testEmail = "TestEmail";
+        User expectedUser = new User();
+        expectedUser.setUserID(2);
+        expectedUser.setEmail(testEmail);
+
+        User userPassedIn = new User();
+        userPassedIn.setUserID(2);
+        userPassedIn.setEmail(testEmail);
+
+        when( mockService.getUserByEmail( testEmail ) )
+                .thenReturn( expectedUser );
+
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedUser, HttpStatus.BAD_REQUEST);
+
+        ResponseEntity<User> responseEntity = userController.createUser( userPassedIn );
+
+        verify( mockService )
+                .getUserByEmail( testEmail );
+
+        assertThat( responseEntity )
+                .isEqualTo( expectedResponseEntity );
     }
 //
 //    @Test

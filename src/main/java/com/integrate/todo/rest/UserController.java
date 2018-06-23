@@ -20,10 +20,20 @@ public class UserController {
     @PostMapping
     public @ResponseBody
     ResponseEntity<User> createUser(@RequestBody User user) {
-        return new ResponseEntity<>(
-                this.service.createUser(user ),
-                HttpStatus.CREATED
-        );
+        //check if user already exists
+        String userEmail = user.geteMail();
+        User checkUser = this.service.getUserByEmail( userEmail );
+        if(checkUser.getUserID() == -1 ) {
+            return new ResponseEntity<>(
+                    this.service.createUser(user),
+                    HttpStatus.CREATED
+            );
+        }else{
+            return new ResponseEntity<>(
+                    user,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
     }
 
     @GetMapping("/id/{id}")
@@ -44,6 +54,23 @@ public class UserController {
         return new ResponseEntity<>( user, HttpStatus.OK );
     }
 
+    @GetMapping("/deleteUser/{email}")
+    public @ResponseBody
+    ResponseEntity<User> deleteUserByEmail(@PathVariable String email ) {
+        User user = this.service.getUserByEmail( email );
+        if(user.getUserID() == -1 ) {
+            return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+        }else{
+
+            int deleteResult = this.service.deleteUser(email);
+            if (deleteResult==1) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(user, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+    }
 
 }
 

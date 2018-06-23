@@ -26,4 +26,7 @@ public class UserService {
     public User getUserByEmail(String email) {
         return database.findUserByEmail(email);
     }
+
+    public int deleteUser(String email) { return  database.deleteUser(email);
+    }
 }
