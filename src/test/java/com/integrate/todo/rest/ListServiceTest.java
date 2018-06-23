@@ -70,7 +70,22 @@ public class ListServiceTest {
                     .isEqualTo(expectedListID);
         }
 
-        //TODO Write test for update list
+    @Test
+    public void updateList_returnsUpdatedListWithCorrectID() {
+        int expectedListID = 1;
+        String title = "New Title";
+        TodoList expected_list = new TodoList();
+
+        when(this.db.updateListTitle(expectedListID, title))
+                .thenReturn(expected_list);
+
+        TodoList list = this.service.updateList(expectedListID, title );
+
+        verify(this.db)
+                .updateListTitle(expectedListID, title);
+
+        assertThat(expected_list).isEqualTo(list);
+    }
 
     }
 

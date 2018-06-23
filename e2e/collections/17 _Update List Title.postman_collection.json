@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ca50f7b0-e12d-4cea-b33a-711794acfac6",
+		"_postman_id": "cdbc63b6-6968-4a51-9cec-43b4b264054d",
 		"name": "17 _Update List Title",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -40,14 +40,15 @@
 							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\",\n  \"id\": {{id}}\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/list",
+							"raw": "http://localhost:8080/list/220000",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"list"
+								"list",
+								"220000"
 							]
 						}
 					},
@@ -116,7 +117,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "35d58b05-d0b6-46b6-b662-290509bd5672",
+								"id": "760d07c7-df9f-4a38-a999-492d0889a3d1",
 								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
@@ -128,7 +129,6 @@
 									"    var id = pm.environment.get(\"id\");",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.title).to.equal(updatedTitle);",
-									"    pm.expect(jsonData.listID).to.equal(parseInt(id));",
 									"});",
 									"",
 									""
@@ -146,17 +146,18 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\",\n  \"id\": {{id}}\n}"
+							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/list",
+							"raw": "http://localhost:8080/list/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"list"
+								"list",
+								"9"
 							]
 						}
 					},
