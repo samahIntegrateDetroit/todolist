@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "4066177a-7392-4799-ab1e-a1b69b11a9d3",
+		"name": "Item",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TestItem",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71a5bef2-a144-4e8f-b6d3-1cd2c879da63",
+								"type": "text/javascript",
+								"exec": [
+									"var _ = require(\"lodash\");",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check that we have a description\", function () {",
+									"    var itemDescription = pm.environment.get(\"description\");",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.description).to.eql(itemDescription);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Check that we have an ID\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(_.has(jsonData, \"ID\")).true;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"{{description}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/list/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"list",
+								"5"
+							]
+						},
+						"description": "Test adding an item to a list"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

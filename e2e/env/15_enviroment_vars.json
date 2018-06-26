@@ -1,0 +1,15 @@
+{
+  "id": "8bd4b0f9-7460-4b60-8b2a-be75e5f8a3b3",
+  "name": "item",
+  "values": [
+    {
+      "key": "description",
+      "value": "this is an item",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-06-26T20:23:16.818Z",
+  "_postman_exported_using": "Postman/6.1.3"
+}
