@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "4066177a-7392-4799-ab1e-a1b69b11a9d3",
+		"_postman_id": "1d3a17e6-ed97-476e-9277-ca3bc66e52d9",
 		"name": "Item",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "TestItem",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "Add Item",

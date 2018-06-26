@@ -1,5 +1,6 @@
 package com.integrate.todo.rest;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -208,5 +209,46 @@ public class ListControllerTest {
 
         assertThat( resultList )
                 .isEqualTo( expectedResponse );
+    }
+    
+    @Test
+    public void addItem_givesHTTPStatusOK_givenAddSuccess(){
+
+        String description = "new item";
+        ListService mockService = mock(ListService.class);
+        ListController listControl = new ListController(mockService);
+        Item item = new Item().setDescription(description);
+
+        Integer listID = 5;
+        Item expectedItem = new Item().setDescription(description).setID(1);
+
+        when( mockService.createItem(item, listID) )
+                .thenReturn( expectedItem );
+
+        ResponseEntity<Item> responseItem = listControl.createItem(item, listID);
+
+        verify(mockService).createItem(item, listID);
+        assertThat(responseItem.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(responseItem.getBody()).isEqualTo(expectedItem);
+    }
+
+    @Test
+    public void addItem_givesHTTPStatusNoContent_givenAddFailure(){
+        ListService mockService = mock(ListService.class);
+        ListController listController = new ListController(mockService);
+
+        Item itemPassedIn = new Item().setDescription("hi");
+
+        Item expectedItem = new Item().setDescription("hi").setID(-1);
+        int listID = 9999;
+
+        when(mockService.createItem(itemPassedIn, listID)).thenReturn(expectedItem);
+
+        ResponseEntity<Item> responseItem = listController.createItem(itemPassedIn, listID);
+
+        verify(mockService).createItem(itemPassedIn,listID);
+
+        assertThat(responseItem.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        assertThat(responseItem.getBody()).isEqualTo(expectedItem);
     }
 }
