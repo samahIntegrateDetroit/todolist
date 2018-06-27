@@ -1,6 +1,7 @@
 package com.integrate.todo.rest;
 
 import com.integrate.todo.User;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,36 +10,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class UserControllerTest {
+
+    UserService mockService;
+    UserController userController;
+
+    @Before
+    public void setUp() {
+        mockService = mock( UserService.class );
+        userController = new UserController(mockService);
+
+    }
+
     @Test
     public void createUser_returnsHttpStatusCreated() {
-        UserService mockService = mock( UserService.class );
-        UserController userController = new UserController(mockService);
 
         User expectedUser = new User();
         User userPassedIn = new User();
 
+        expectedUser.setUserID(1);
 
-        when( mockService.createUser( userPassedIn ) )
-                .thenReturn( expectedUser );
+        when (mockService.createUser(userPassedIn))
+                .thenReturn(expectedUser);
         ResponseEntity expectedResponseEntity = new ResponseEntity<>(
                 expectedUser, HttpStatus.CREATED);
-
         ResponseEntity<User> responseEntity = userController.createUser( userPassedIn );
-
-
-        verify( mockService )
+        verify(mockService)
                 .createUser( userPassedIn );
-
         assertThat( responseEntity )
                 .isEqualTo( expectedResponseEntity );
     }
 
     @Test
     public void getUser_returnsUserAndHttpStatus200() {
-
-
-        UserService mockService = mock( UserService.class );
-        UserController userController = new UserController( mockService );
 
         User expectedUser = new User();
         expectedUser.setUserID(1);
@@ -62,10 +65,6 @@ public class UserControllerTest {
     @Test
     public void getUserByEmail_returnsUserAndHttpStatus200() {
 
-
-        UserService mockService = mock( UserService.class );
-        UserController userController = new UserController( mockService );
-
         User expectedUser = new User();
         expectedUser.setUserID(2);
         expectedUser.setEmail("zaara0001@example.com");
@@ -88,8 +87,6 @@ public class UserControllerTest {
 
     @Test
     public void getUser_whenDoesntExist_returnsHttpStatus204(){
-        UserService mockService = mock( UserService.class );
-        UserController userController = new UserController( mockService );
 
         User expectedUser = new User();
         expectedUser.setUserID( -1 );
@@ -100,8 +97,8 @@ public class UserControllerTest {
 
         ResponseEntity expectedResponse = new ResponseEntity<>(
                 expectedUser,
-                HttpStatus.NO_CONTENT
-        );
+                HttpStatus.NO_CONTENT);
+
 
         ResponseEntity<User> resultUser = userController.readUser( input_id );
 
@@ -112,27 +109,28 @@ public class UserControllerTest {
         assertThat( resultUser )
                 .isEqualTo( expectedResponse );
     }
-//
-//    @Test
-//    public void updateListTitle_updatesListTitle_returnsHttpStatus200() {
-//        ListService mockService = mock( ListService.class );
-//        ListController todoListController = new ListController(mockService);
-//        String newTitle = "New Title";
-//        int listID = 1;
-//        TodoList todoList = new TodoList().setTitle(newTitle).setListID(listID);
-//
-//        when (mockService.updateList(listID, newTitle))
-//                .thenReturn( todoList );
-//
-//
-//        ResponseEntity<TodoList> responseEntity = todoListController.updateList(listID,newTitle);
-//        TodoList body = responseEntity.getBody();
-//
-//        verify(mockService).updateList(listID, newTitle);
-//
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(body.getTitle()).isEqualTo(newTitle);
-//        assertThat(body.getListID()).isEqualTo(listID);
-//
-//    }
+
+    @Test
+    public void deleteUserMethod_deletesUserFromDatabase() {
+
+        User expectedUser = new User();
+        User deletedUserPassedIn = new User();
+
+        String expextedEmail = expectedUser.geteMail();
+        String deletedEmail = deletedUserPassedIn.geteMail();
+        expectedUser.setUserID(1);
+
+        when(mockService.deleteUserByEmail(expextedEmail)).thenReturn(expectedUser);
+
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedUser, HttpStatus.GONE);
+
+
+        ResponseEntity<User> responseEntity = userController.deleteUserByEmail(deletedEmail);
+
+        verify(mockService).deleteUserByEmail(deletedEmail);
+
+        assertThat(responseEntity).isEqualTo( expectedResponseEntity );
+
+    }
 }
