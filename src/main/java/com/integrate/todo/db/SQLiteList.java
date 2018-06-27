@@ -1,5 +1,6 @@
 package com.integrate.todo.db;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -59,12 +60,34 @@ public class SQLiteList implements DBWrapperList {
                 todoList.setUserID((resultSet.getInt("USER_ID")));
                 todoList.setTitle( resultSet.getString( "LIST_NAME" ) );
                 todoList.setArchiveStatus( resultSet.getString("ARCHIVE_STATUS"));
+                todoList = setItemsOnList(todoList);
             }
             connection.close();
             return todoList;
         } catch( SQLException e ) { e.printStackTrace(); }
 
         todoList.setListID( -1 );
+        return todoList;
+    }
+
+    private TodoList setItemsOnList(TodoList todoList) {
+        Item item;
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery( "SELECT * from Item WHERE LIST_ID=" + todoList.getListID() + ";" );
+
+            while( resultSet.next() == true) {
+
+                item = new Item();
+                item.setID(resultSet.getInt("ID"));
+                item.setDescription(resultSet.getString("DESCRIPTION"));
+                todoList.addItem(item);
+            }
+            connection.close();
+        } catch( SQLException e ) { e.printStackTrace(); }
+
         return todoList;
     }
 

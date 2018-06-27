@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1d3a17e6-ed97-476e-9277-ca3bc66e52d9",
+		"_postman_id": "139f34ff-5634-40db-ba9a-ffe2eb39e825",
 		"name": "Item",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,12 +10,64 @@
 			"description": null,
 			"item": [
 				{
+					"name": "Create List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc807b6f-274e-47b8-b300-dc02048d7bd6",
+								"type": "text/javascript",
+								"exec": [
+									"var _ = require(\"lodash\");",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Put listID in environment\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var listID = jsonData.listID;",
+									"    pm.environment.set(\"listID\", listID);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"{{listTitle}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"list"
+							]
+						},
+						"description": "Test adding an item to a list"
+					},
+					"response": []
+				},
+				{
 					"name": "Add Item",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "71a5bef2-a144-4e8f-b6d3-1cd2c879da63",
+								"id": "1b635073-799f-4f2a-a60d-e83f4837a96f",
 								"type": "text/javascript",
 								"exec": [
 									"var _ = require(\"lodash\");",
@@ -26,7 +78,7 @@
 									"",
 									"",
 									"pm.test(\"Check that we have a description\", function () {",
-									"    var itemDescription = pm.environment.get(\"description\");",
+									"    var itemDescription = pm.environment.get(\"itemDescription\");",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData.description).to.eql(itemDescription);",
 									"});",
@@ -34,7 +86,9 @@
 									"",
 									"pm.test(\"Check that we have an ID\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(_.has(jsonData, \"ID\")).true;",
+									"    pm.expect(_.has(jsonData, \"id\")).true;",
+									"    var newId = jsonData.id;",
+									"    pm.environment.set(\"itemID\", newId);",
 									"});"
 								]
 							}
@@ -50,10 +104,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"description\": \"{{description}}\"\n}"
+							"raw": "{\n  \"description\": \"{{itemDescription}}\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/list/5",
+							"raw": "http://localhost:8080/list/{{listID}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -61,7 +115,66 @@
 							"port": "8080",
 							"path": [
 								"list",
-								"5"
+								"{{listID}}"
+							]
+						},
+						"description": "Test adding an item to a list"
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8af43ece-1ec1-44ac-8ab0-2b91b97d1cbc",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Item ID is same as added item\", function () {",
+									"    var expectedLength = 1;",
+									"    var expectedItemId = pm.environment.get(\"itemID\");",
+									"    var expectedItemDescription = pm.environment.get(\"itemDescription\");",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"    var itemData = jsonData.items;",
+									"    ",
+									"    pm.expect(itemData.length).to.equal(expectedLength);",
+									"    pm.expect(itemData[0].id).to.equal(expectedItemId);",
+									"    pm.expect(itemData[0].description).to.equal(expectedItemDescription);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"{{description}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/list/{{listID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"list",
+								"{{listID}}"
 							]
 						},
 						"description": "Test adding an item to a list"

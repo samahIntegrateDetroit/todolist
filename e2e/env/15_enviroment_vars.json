@@ -3,13 +3,31 @@
   "name": "item",
   "values": [
     {
-      "key": "description",
+      "key": "itemDescription",
       "value": "this is an item",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "listTitle",
+      "value": "this is a list title",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "listID",
+      "value": 10,
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "itemID",
+      "value": 6,
       "enabled": true,
       "type": "text"
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2018-06-26T20:23:16.818Z",
+  "_postman_exported_at": "2018-06-27T15:37:23.848Z",
   "_postman_exported_using": "Postman/6.1.3"
 }

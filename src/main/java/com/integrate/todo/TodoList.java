@@ -1,5 +1,7 @@
 package com.integrate.todo;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class TodoList {
@@ -9,6 +11,8 @@ public class TodoList {
     private Integer userID;
     private String archiveStatus;
 
+
+    private List<Item> items;
 
     public Integer getUserID() {
         return userID;
@@ -28,7 +32,9 @@ public class TodoList {
         return this;
     }
 
-    public TodoList(){}
+    public TodoList(){
+        items = new LinkedList<Item>();
+    }
 
     public Integer getListID() {
         return listID;
@@ -46,6 +52,15 @@ public class TodoList {
     public TodoList setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public Item addItem(Item item) {
+        items.add(item);
+        return item;
     }
 
     @Override
