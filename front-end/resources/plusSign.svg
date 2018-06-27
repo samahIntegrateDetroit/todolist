@@ -1,0 +1,23 @@
+
+<svg width="3.5em" height="3.5em" viewBox="0 0 68 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-2.2%" y="-25.2%" width="104.3%" height="153.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.290591033 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="GurmukhiSangamMN, Gurmukhi Sangam MN" font-size="64" font-weight="normal">
+        <g id="Desktop-HD" transform="translate(-1292.000000, -24.000000)" fill="#000000">
+            <g id="Top-Nav-Bar" filter="url(#filter-1)" transform="translate(2.000000, 0.000000)">
+                <text id="+">
+                    <tspan x="1304" y="80">+</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

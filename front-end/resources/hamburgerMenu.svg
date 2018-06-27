@@ -1,0 +1,26 @@
+
+<svg width="3.5em" height="3.5em" viewBox="0 0 116 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-2.2%" y="-25.2%" width="104.3%" height="153.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.290591033 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-11.000000, -15.000000)" fill="#382039">
+            <g id="Top-Nav-Bar" filter="url(#filter-1)" transform="translate(2.000000, 0.000000)">
+                <g id="menustyle1" transform="translate(27.000000, 33.000000)">
+                    <rect id="Rectangle-1" x="0" y="0" width="80" height="3" rx="1.5"></rect>
+                    <rect id="Rectangle-2" x="0" y="15" width="80" height="3" rx="1.5"></rect>
+                    <rect id="Rectangle-3" x="0" y="29" width="80" height="3" rx="1.5"></rect>
+                    <rect id="Rectangle-4" x="0" y="44" width="80" height="3" rx="1.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

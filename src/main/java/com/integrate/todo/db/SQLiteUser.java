@@ -144,4 +144,25 @@ public class SQLiteUser implements DBWrapperUser {
 
         return user;
     }
+
+    @Override
+    public int deleteUser(String email) {
+        User user = new User();
+        int DBresult = 0;
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery( "DELETE from User WHERE EMAIL='" + email + "';" );
+
+            if( resultSet.rowDeleted() ) {
+                DBresult=1;
+            } else {
+                DBresult=0;
+            }
+            connection.close();
+            return DBresult;
+        } catch( SQLException e ) { e.printStackTrace(); }
+
+        return DBresult;
+    }
 }
