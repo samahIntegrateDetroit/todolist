@@ -14,6 +14,4 @@ public interface DBWrapperUser {
     User createUser(User user);
 
     User findUserByEmail(String email);
-
-    int deleteUser(String email);
 }

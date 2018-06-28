@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "85105898-95eb-4be0-98bf-0c9146be0086",
+						"id": "19f0a293-a9f6-41d0-94f2-2362d5dd8d02",
 						"type": "text/javascript",
 						"exec": [
 							"var _ = require(\"lodash\");",
@@ -27,9 +27,9 @@
 							"    var expectedArchiveStatus = pm.environment.get(\"archiveStatusNo\");",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.title).to.equal(expectedTitle);",
-							"    //pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
-							"    //pm.expect(jsonData.archiveStatusNo).to.equal(expectedArchiveStatus);",
-							"    //pm.expect(_.has(jsonData, \"listID\")).true;",
+							"    pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
+							"    pm.expect(jsonData.archiveStatus).to.equal(expectedArchiveStatus);",
+							"    pm.expect(_.has(jsonData, \"listID\")).true;",
 							"});"
 						]
 					}
@@ -67,7 +67,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "856fc641-068c-4ace-bbb3-a7e05cdd0125",
+						"id": "31848782-88f6-4c36-8438-b585c3c31bdf",
 						"type": "text/javascript",
 						"exec": [
 							"var _ = require(\"lodash\");",
@@ -78,12 +78,12 @@
 							"",
 							"",
 							"pm.test(\"Has properties\", function () {",
-							"    var expectedTitle = pm.environment.get(\"title\");",
-							"    var expectedUserID = pm.environment.get(\"userID\");",
+							"    //var expectedTitle = pm.environment.get(\"title\");",
+							"    //var expectedUserID = pm.environment.get(\"userID\");",
 							"    var expectedArchiveStatus = pm.environment.get(\"archiveStatusYes\");",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.title).to.equal(expectedTitle);",
-							"    pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
+							"    //pm.expect(jsonData.title).to.equal(expectedTitle);",
+							"    //pm.expect(jsonData.userID).to.equal(parseInt(expectedUserID));",
 							"    pm.expect(jsonData.archiveStatus).to.equal(expectedArchiveStatus);",
 							"    pm.expect(_.has(jsonData, \"listID\")).true;",
 							"});"
@@ -104,7 +104,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/list/archive/5",
+					"raw": "http://localhost:8080/list/archive/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +113,7 @@
 					"path": [
 						"list",
 						"archive",
-						"5"
+						"1"
 					]
 				}
 			},
