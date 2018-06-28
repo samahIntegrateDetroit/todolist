@@ -12,34 +12,34 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SQLiteItem implements DBWrapperItem {
-//
-//    @Autowired
-//    DataSource dataSource;
-//
-//
-//    @Override
-//    public TodoList createItem(Item item) {
-//        String item = todoList.getTitle();
-//        Integer todoListUserID = todoList.getUserID();
-//        String todoListArchiveStatus = todoList.getArchiveStatus();
-//        try {
-//            Connection connection = dataSource.getConnection();
-//            Statement statement = connection.createStatement();
-//            statement.executeUpdate(
-//                    "INSERT INTO List (USER_ID, LIST_NAME, ARCHIVE_STATUS) VALUES ('" + todoListUserID + "','" + todoListTitle + "','" + todoListArchiveStatus + "')"
-//            );
-//            statement.close();
-//            statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
-//            int id = resultSet.getInt("last_insert_rowid()");
-//            todoList.setListID(id);
-//            connection.close();
-//            return todoList;
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        todoList.setListID(-1);
-//        return todoList;
-//    }
+
+    @Autowired
+    DataSource dataSource;
+
+
+    @Override
+    public Item createItem(Item item) {
+        Integer listID = item.getListID();
+        String description = item.getDescription();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "INSERT INTO Item (LIST_ID, DESCRIPTION) VALUES ('" + listID + "','" + description + "')"
+            );
+            statement.close();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
+            int id = resultSet.getInt("last_insert_rowid()");
+            item.setItemID(id);
+            connection.close();
+            return item;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        item.setItemID(-1);
+        return item;
+    }
 }

@@ -21,7 +21,7 @@ public class ItemServiceTest {
 
         this.db = mock(SQLiteItem.class);
 
-//        this.service = new ItemService(this.db);
+        this.service = new ItemService(this.db);
 
     }
 
@@ -37,18 +37,18 @@ public class ItemServiceTest {
         Item expectedItem = new Item()
                 .setItemID(expectedID).setListID(expectedListID).setDescription(expectedDescription);
 
-//        when(this.db.createItem(inputItem))
-//                .thenReturn(expectedItem);
-//
-//        Item item = this.service.createItem(
-//                new Item().setListID(expectedListID).setDescription(expectedDescription)
-//        );
+        when(this.db.createItem(inputItem))
+                .thenReturn(expectedItem);
 
-//        verify(db)
-//                .createItem(inputItem);
+        Item item = this.service.createItem(
+                new Item().setListID(expectedListID).setDescription(expectedDescription)
+        );
 
-//        assertThat(item)
-//                .isEqualTo(expectedItem);
+        verify(db)
+                .createItem(inputItem);
+
+        assertThat(item)
+                .isEqualTo(expectedItem);
     }
 
 }
