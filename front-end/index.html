@@ -7,9 +7,16 @@
     <title>Foundation for Sites</title>
     <link rel="stylesheet" href="styles/foundation.css">
     <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/customCSS.css">
     <link href="resources/AvenirNextCondensed-Regular.ttf">
 
+    <script defer src="js/vendor/jquery.js"></script>
+    <script defer src="js/vendor/what-input.js"></script>
+    <script defer src="js/vendor/foundation.js"></script>
+    <script defer src="js/app.js"></script>
+    <script defer src="js/vendor/card.js"></script>
   </head>
+
   <body>
     <div class="mobile-nav-bar title-bar">
       <div class="title-bar-left">
@@ -18,35 +25,43 @@
       </div>
 
       <div class="title-bar-right">
-        <button href="#" data-open="mobile-ios-modal"><img src="./resources/plusSign.svg"></button>
-        <button><img src="./resources/expandSign.svg"></button>
+        <button type="button" data-open="firstModal"><img src="./resources/plusSign.svg"></button>
+        
+        <button><img data-open="secondModal" src="./resources/expandSign.svg"></button>
        </div>
       
     </div>
 
     <div class="button-group align-center">
-        
-      <div class="reveal mobile-ios-modal" id="mobile-ios-modal" data-reveal>
-        <div class="mobile-ios-modal-inner">
-          <div><p>List title:</p></div>
-          <div ><input type="text"></div>
-        </div>
-      
-        <div class="mobile-ios-modal-options">
-          <center><button data-close class="button">Create List</button></center>
-        </div>
       </div>
-      
-      </div>
-      
-      
-    
-    
-    
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/what-input.js"></script>
-    <script src="js/vendor/foundation.js"></script>
-    <script src="js/app.js"></script>
+      
+
+<!-- Reveal Modals begin -->
+<div id="firstModal" class="reveal reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+  <div class="listTitleBox">
+    <h2 id="firstModalTitle">List title:&nbsp </h2>
+    <input type="text">
+  </div>
+  <center><a href="#" data-close data-reveal-id="firstModal" class="secondary button" id ="createListButton">Create List</a></center>
+  <!-- <button data-close class="button">Cancel</button> -->
+</div>
+
+<!-- <div id="secondModal" class="reveal reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+    <div class="listTitleBox">
+        <h2 id="firstModalTitle">List title &nbsp </h2>
+      
+      </div>
+      <div>thing</div>
+</div>
+
+<div id="videoModal" class="reveal reveal-modal large" data-reveal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
+  <h2 id="videoModalTitle">This modal has video</h2>
+  <div class="flex-video widescreen vimeo">
+    <iframe width="1280" height="720" src="//www.youtube-nocookie.com/embed/wnXCopXXblE?rel=0" frameborder="0" allowfullscreen></iframe>
+  </div> -->
+
+</div>
+
   </body>
 </html>

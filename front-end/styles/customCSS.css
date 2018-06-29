@@ -1,0 +1,7 @@
+.listTitleBox {
+    border-bottom: 1px solid black;
+    padding: .5em;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
