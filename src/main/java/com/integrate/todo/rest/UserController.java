@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -16,32 +17,25 @@ public class UserController {
         this.service = service;
     }
 
-    @CrossOrigin(origins = "http://localhost:9876")
     @PostMapping
     public @ResponseBody
     ResponseEntity<User> createUser(@RequestBody User user) {
-        //check if user already exists
-        String userEmail = user.geteMail();
-        User checkUser = this.service.getUserByEmail( userEmail );
-        if(checkUser.getUserID() == -1 ) {
-            return new ResponseEntity<>(
-                    this.service.createUser(user),
-                    HttpStatus.CREATED
-            );
-        }else{
-            return new ResponseEntity<>(
-                    user,
-                    HttpStatus.BAD_REQUEST
-            );
+        user = this.service.createUser(user );
+        if (user.getUserID() == -1 ) {
+            return new ResponseEntity<>(user,
+                HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(user,
+                HttpStatus.CREATED);
     }
 
     @GetMapping("/id/{id}")
     public @ResponseBody
     ResponseEntity<User> readUser(@PathVariable Integer id ) {
         User user = this.service.getUser( id );
-        if(user.getUserID() == -1 )
-            return new ResponseEntity<>( user, HttpStatus.NO_CONTENT);
+        if(user.getUserID() == -1 ) {
+            return new ResponseEntity<>(user, HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>( user, HttpStatus.OK );
     }
 
@@ -49,28 +43,22 @@ public class UserController {
     public @ResponseBody
     ResponseEntity<User> readUserByEmail(@PathVariable String email ) {
         User user = this.service.getUserByEmail( email );
-        if(user.getUserID() == -1 )
-            return new ResponseEntity<>( user, HttpStatus.NO_CONTENT);
+        if (user.getUserID() == -1 ) {
+            return new ResponseEntity<>(user, HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>( user, HttpStatus.OK );
     }
 
-    @GetMapping("/deleteUser/{email}")
+    @DeleteMapping("/email/{email}")
     public @ResponseBody
     ResponseEntity<User> deleteUserByEmail(@PathVariable String email ) {
-        User user = this.service.getUserByEmail( email );
-        if(user.getUserID() == -1 ) {
+        User user = this.service.deleteUserByEmail(email);
+        if (user.getUserID() == -1) {
             return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
-        }else{
-
-            int deleteResult = this.service.deleteUser(email);
-            if (deleteResult==1) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(user, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
         }
+        return new ResponseEntity<>(user, HttpStatus.GONE);
+
 
     }
-
 }
 

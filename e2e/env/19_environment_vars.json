@@ -1,139 +1,7 @@
 {
-  "id": "ae7bf42a-0b12-4950-83a9-f6b409a727e0",
-  "name": "local",
+  "id": "c93a1500-e4e0-4f83-bffb-225139ba8e5c",
+  "name": "ArchiveList",
   "values": [
-    {
-      "key": "title",
-      "value": "Untitled2",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "firstName",
-      "value": "Zaara",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "lastName",
-      "value": "Userson",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "eMail",
-      "value": "zaara0001@exaple.com",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "passwordHash",
-      "value": "password123",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "signupDate",
-      "value": "6-13-2018",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "preference",
-      "value": "0",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "firstName2",
-      "value": "James",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "lastName2",
-      "value": "Public III",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "eMail2",
-      "value": "jamespublic@example.com",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "passwordHash2A",
-      "value": "321drowssap",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "passwordHash2B",
-      "value": "FxxxYou",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "signupDate2A",
-      "value": "6-8-2018",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "signupDate2B",
-      "value": "6-11-2018",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "firstName3",
-      "value": "Vicente",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "lastName3",
-      "value": "Fernandez",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "eMail3",
-      "value": "mariachiVicexample.com",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "passwordHash3",
-      "value": "wordpass",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "signupDate3",
-      "value": "6-10-2018",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "preference2",
-      "value": "1",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "preference3",
-      "value": "0",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "UserIdDoesNotExist",
-      "value": "-1",
-      "enabled": true,
-      "type": "text"
-    },
     {
       "key": "userID",
       "value": "1",
@@ -157,9 +25,15 @@
       "value": "1",
       "enabled": true,
       "type": "text"
+    },
+    {
+      "key": "title",
+      "value": "Untitled2",
+      "enabled": true,
+      "type": "text"
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2018-06-23T21:04:51.963Z",
+  "_postman_exported_at": "2018-06-28T00:39:21.369Z",
   "_postman_exported_using": "Postman/6.0.10"
 }

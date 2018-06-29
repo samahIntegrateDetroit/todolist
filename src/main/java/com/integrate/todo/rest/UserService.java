@@ -5,6 +5,8 @@ import com.integrate.todo.db.DBWrapperUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class UserService {
 
@@ -27,6 +29,5 @@ public class UserService {
         return database.findUserByEmail(email);
     }
 
-    public int deleteUser(String email) { return  database.deleteUser(email);
-    }
+    public User deleteUserByEmail(String email) { return database.deleteUser(email); }
 }
