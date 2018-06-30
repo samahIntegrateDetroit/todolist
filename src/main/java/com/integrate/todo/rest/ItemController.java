@@ -10,7 +10,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/list/item")
 public class ItemController {
     private final ItemService service;
 
@@ -22,9 +22,12 @@ public class ItemController {
     @PostMapping
     public @ResponseBody
     ResponseEntity<Item> createItem(@RequestBody Item item) {
+        item = this.service.createItem( item );
+        if (item.getItemID() == -1) {
+           return new ResponseEntity<>(item, HttpStatus.NOT_MODIFIED);
+        }
         return new ResponseEntity<>(
-                this.service.createItem( item ),
-                HttpStatus.CREATED
+               item, HttpStatus.CREATED
         );
     }
 

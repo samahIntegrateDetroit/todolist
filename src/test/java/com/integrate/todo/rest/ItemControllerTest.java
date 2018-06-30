@@ -5,9 +5,11 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.xml.ws.http.HTTPBinding;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -19,8 +21,8 @@ public class ItemControllerTest {
         ItemService mockService = mock( ItemService.class );
         ItemController itemController = new ItemController(mockService);
 
-        Item expectedItem = new Item();
-        Item itemPassedIn = new Item();
+        Item expectedItem = new Item().setItemID(999);
+        Item itemPassedIn = new Item().setDescription("New Item");
 
 
         when( mockService.createItem( itemPassedIn ) )
@@ -37,6 +39,26 @@ public class ItemControllerTest {
         assertThat( responseEntity )
                 .isEqualTo( expectedResponseEntity );
     }
+
+    @Test
+    public void createItem_returnsHTTPstatus304_whenItemIsNotCreated() {
+        ItemService mockService = mock(ItemService.class);
+        ItemController itemController = new ItemController(mockService);
+
+        Item item = new Item ().setDescription("New Item");
+        Item expectedItem = new Item().setItemID(-1);
+
+        when (mockService.createItem(item)).thenReturn(expectedItem);
+
+
+        ResponseEntity<Item> result = itemController.createItem(item);
+
+        assertThat( result.getBody() ).isEqualTo(expectedItem);
+        assertThat( result.getStatusCode()).isEqualTo(HttpStatus.NOT_MODIFIED);
+
+        verify(mockService).createItem(item);
+    }
+
 
     @Test
     public void getItem_returnsItemAndHttpStatus200() {
