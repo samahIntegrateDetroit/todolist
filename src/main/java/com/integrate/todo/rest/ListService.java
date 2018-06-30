@@ -40,6 +40,8 @@ public class ListService {
         public List<Item> getListItems(int listID) {
             return database.getListItemsByID(listID);
     }
+
+        public TodoList deleteList(int listID) { return database.deleteList(listID); }
 }
 
 
