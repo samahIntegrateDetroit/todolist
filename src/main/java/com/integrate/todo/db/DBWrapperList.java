@@ -8,5 +8,7 @@ public interface DBWrapperList {
 
     TodoList findListById(int id);
 
-    TodoList updateListTitle(int id, String newTitle);
+    TodoList updateListTitle(Integer listID, String newTitle);
+
+    TodoList archiveListById(TodoList todoList);
 }

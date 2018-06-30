@@ -20,11 +20,13 @@ public class SQLiteList implements DBWrapperList {
     @Override
     public TodoList createList(TodoList todoList) {
         String todoListTitle = todoList.getTitle();
+        Integer todoListUserID = todoList.getUserID();
+        String todoListArchiveStatus = todoList.getArchiveStatus();
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "INSERT INTO List (LIST_NAME) VALUES ('"+todoListTitle+"')"
+                    "INSERT INTO List (USER_ID, LIST_NAME, ARCHIVE_STATUS) VALUES ('" + todoListUserID + "','" + todoListTitle + "','" + todoListArchiveStatus + "')"
             );
             statement.close();
             statement = connection.createStatement();
@@ -54,32 +56,30 @@ public class SQLiteList implements DBWrapperList {
                 todoList.setListID( -1 );
             } else {
                 todoList.setListID( resultSet.getInt( "ID" ) );
+                todoList.setUserID((resultSet.getInt("USER_ID")));
                 todoList.setTitle( resultSet.getString( "LIST_NAME" ) );
+                todoList.setArchiveStatus( resultSet.getString("ARCHIVE_STATUS"));
             }
             connection.close();
             return todoList;
         } catch( SQLException e ) { e.printStackTrace(); }
 
         todoList.setListID( -1 );
-
         return todoList;
     }
 
     @Override
-    public TodoList updateListTitle(int id, String newTitle) {
-        TodoList todoList = new TodoList();
-
+    public TodoList updateListTitle(Integer listID, String newTitle) {
+        TodoList todoList = this.findListById(listID);
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + id + ";"
+                    "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + listID + ";"
             );
             statement.close();
             todoList.setTitle(newTitle);
-            todoList.setListID(id);
             return todoList;
-
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -88,6 +88,29 @@ public class SQLiteList implements DBWrapperList {
         todoList.setListID(-1);
         return todoList;
 
+    }
+
+    @Override
+    public TodoList archiveListById(TodoList todoList) {
+        int listId = todoList.getListID();
+        String archiveStatus = "Y";
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(
+                    "UPDATE List SET ARCHIVE_STATUS = '" + archiveStatus + "' WHERE ID = " + listId + ";"
+            );
+            statement.close();
+            todoList.setArchiveStatus(archiveStatus);
+            return todoList;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        todoList.setArchiveStatus("");
+        todoList.setListID(-1);
+        return todoList;
 
     }
 }

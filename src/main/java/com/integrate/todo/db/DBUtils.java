@@ -28,6 +28,7 @@ public class DBUtils {
 
         initializeListTable();
         initializeUserTable();
+        initializeItemTable();
 
         try{
             statement.close();
@@ -60,7 +61,31 @@ public class DBUtils {
             statement.executeUpdate(
                     "CREATE TABLE IF NOT EXISTS List(" +
                             "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                            "LIST_NAME varchar(30) not null)"
+                            "USER_ID INTEGER not null, " +
+                            "LIST_NAME varchar(30) not null, " +
+                            "ARCHIVE_STATUS varchar(1), " +
+                            "CONSTRAINT User_List " +
+                            "FOREIGN KEY (USER_ID) " +
+                            "REFERENCES User(ID) " +
+                            "ON DELETE CASCADE)"
+            );
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeItemTable(){
+        try {
+            statement.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS ITEM(" +
+                            "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "LIST_ID INTEGER not null, " +
+                            "DESCRIPTION TEXT not null, " +
+                            "CONSTRAINT List_Item " +
+                            "FOREIGN KEY (LIST_ID) " +
+                            "REFERENCES List(ID) " +
+                            "ON DELETE CASCADE)"
             );
         }
         catch (SQLException e) {

@@ -29,19 +29,19 @@ public class SQLiteUser implements DBWrapperUser {
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate(
+            statement.execute(
                     "INSERT INTO User (" +
                             "FIRST_NAME," +
                             "LAST_NAME," +
                             "EMAIL," +
                             "PASSWORD_HASH," +
                             "SIGNUP_DATE," +
-                            "PREFERENCE) VALUES ('"+firstName+"','"+
-                            lastName+"','"+
-                            eMail+"','"+
-                            passwordHash+"','"+
-                            signupDate+"','"+
-                            preference+"')"
+                            "PREFERENCE) VALUES ('" + firstName + "','" +
+                            lastName + "','" +
+                            eMail + "','" +
+                            passwordHash + "','" +
+                            signupDate + "','" +
+                            preference + "');"
             );
             statement.close();
             statement = connection.createStatement();
@@ -56,6 +56,33 @@ public class SQLiteUser implements DBWrapperUser {
         }
         user.setUserID(-1);
         return user;
+    }
+
+    @Override
+    public User deleteUser(String email)  {
+        User userToDelete = findUserByEmail(email);
+        int result = 0;
+        if (userToDelete.getUserID() > -1) {
+            try {
+                Connection connection = dataSource.getConnection();
+                Statement statement = connection.createStatement();
+
+                result = statement.executeUpdate(String.format(
+                        "DELETE FROM %s WHERE %s=\"%s\";",
+                        "User",
+                        "EMAIL",
+                        email
+                ));
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (result == 0) {
+            userToDelete.setUserID(-1);
+        }
+        return userToDelete;
     }
 
     @Override
@@ -117,4 +144,25 @@ public class SQLiteUser implements DBWrapperUser {
 
         return user;
     }
+//
+//    @Override
+//    public int deleteUser(String email) {
+//        User user = new User();
+//        int DBresult = 0;
+//        try {
+//            Connection connection = dataSource.getConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery( "DELETE from User WHERE EMAIL='" + email + "';" );
+//
+//            if( resultSet.rowDeleted() ) {
+//                DBresult=1;
+//            } else {
+//                DBresult=0;
+//            }
+//            connection.close();
+//            return DBresult;
+//        } catch( SQLException e ) { e.printStackTrace(); }
+//
+//        return DBresult;
+//    }
 }

@@ -29,34 +29,44 @@ public class ListServiceTest {
         @Test
         public void createTodoList_savesToRepository() {
             int expectedID = 3;
+            int expectedUserID = 4;
             String expectedTitle = "Specific value";
+            String expectedArchiveStatus = "";
 
-            TodoList inputList = new TodoList().setTitle(expectedTitle);
+
+            TodoList inputList = new TodoList()
+                    .setUserID(expectedUserID).setTitle(expectedTitle).setArchiveStatus(expectedArchiveStatus);
 
             TodoList expectedTodoList = new TodoList()
-                    .setTitle(expectedTitle).setListID(expectedID);
+                    .setListID(expectedID).setUserID(expectedUserID).setTitle(expectedTitle).setArchiveStatus(expectedArchiveStatus);
 
             when(this.db.createList(inputList))
                     .thenReturn(expectedTodoList);
 
             TodoList todoList = this.service.createTodoList(
-                    new TodoList().setTitle(expectedTitle)
+                    new TodoList().setUserID(expectedUserID).setTitle(expectedTitle).setArchiveStatus(expectedArchiveStatus)
             );
-
 
             verify(db)
                     .createList(inputList);
 
-            assertThat(todoList.getListID())
-                    .isEqualTo(expectedID);
+            assertThat(todoList)
+                    .isEqualTo(expectedTodoList);
         }
 
         @Test
         public void getList_returnsListWithCorrectID() {
             int expectedListID = 1;
+            int expectedUserID = 4;
+            String expectedTitle = "Specific value";
+            String expectedArchiveStatus = "";
+
             TodoList expected_list = new TodoList()
-                    .setTitle("")
-                    .setListID(expectedListID);
+                    .setListID(expectedListID)
+                    .setUserID(expectedUserID)
+                    .setTitle(expectedTitle)
+                    .setArchiveStatus(expectedArchiveStatus);
+
 
             when(this.db.findListById(expectedListID))
                     .thenReturn(expected_list);
@@ -66,8 +76,42 @@ public class ListServiceTest {
             verify(this.db)
                     .findListById(expectedListID);
 
-            assertThat(list.getListID())
-                    .isEqualTo(expectedListID);
+            assertThat(list)
+                    .isEqualTo(expected_list);
+        }
+
+        @Test
+        public void archiveList_returnsArchivedList() {
+            int expectedListID = 1;
+            int expectedUserID = 4;
+            String expectedTitle = "Specific value";
+            String expectedArchiveStatus = "Y";
+
+            TodoList expected_list = new TodoList()
+                    .setListID(expectedListID)
+                    .setUserID(expectedUserID)
+                    .setTitle(expectedTitle)
+                    .setArchiveStatus(expectedArchiveStatus);
+
+            TodoList inputList = new TodoList()
+                    .setListID(expectedListID)
+                    .setUserID(expectedUserID)
+                    .setTitle(expectedTitle)
+                    .setArchiveStatus("");
+
+
+            when(this.db.archiveListById(inputList))
+                    .thenReturn(expected_list);
+
+            TodoList list = this.service.archiveList(inputList);
+
+            verify(this.db)
+                    .archiveListById(inputList);
+
+            assertThat(list.getArchiveStatus())
+                    .isEqualTo(expectedArchiveStatus);
+
+
         }
 
     @Test

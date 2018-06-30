@@ -141,4 +141,72 @@ public class ListControllerTest {
         assertThat(body.getListID()).isEqualTo(listIDToReturn);
 
     }
+
+    @Test
+    public void archiveList_returnsArchivedListAndHttpStatus200() {
+        int expectedListID = 1;
+        int expectedUserID = 4;
+        String expectedTitle = "Specific value";
+        String expectedArchiveStatus = "Y";
+
+        int listIDToPassIn = 1;
+
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        TodoList expectedTodoList = new TodoList()
+                .setListID(expectedListID)
+                .setUserID(expectedUserID)
+                .setTitle(expectedTitle)
+                .setArchiveStatus(expectedArchiveStatus);
+
+        TodoList inputList = new TodoList()
+                .setListID(expectedListID)
+                .setUserID(expectedUserID)
+                .setTitle(expectedTitle)
+                .setArchiveStatus("");
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.OK);
+
+        when( mockService.getList(listIDToPassIn) )
+                .thenReturn( inputList );
+
+        when( mockService.archiveList(inputList ) )
+                .thenReturn( expectedTodoList );
+
+        ResponseEntity<TodoList> resultList = todoListController.archiveList(listIDToPassIn);
+
+        verify( mockService )
+                .archiveList(inputList );
+
+        assertThat( resultList )
+                .isEqualTo( expectedResponse );
+    }
+
+    @Test
+    public void archiveList_whenListDoesntExist_DoesNotUpdateArchiveStatus_returnsHttpStatus304(){
+        int expectedListID = -1;
+        int listIDToPassIn = 5;
+
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        TodoList expectedTodoList = new TodoList()
+                .setListID(expectedListID);
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.NOT_MODIFIED);
+
+        when( mockService.getList(listIDToPassIn) )
+                .thenReturn( expectedTodoList );
+
+        ResponseEntity<TodoList> resultList = todoListController.archiveList(listIDToPassIn);
+
+        verify( mockService )
+                .getList(listIDToPassIn );
+
+        assertThat( resultList )
+                .isEqualTo( expectedResponse );
+    }
 }
