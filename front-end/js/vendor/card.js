@@ -1,30 +1,59 @@
 "use strict";
 {
     $("#createListButton").on("click", (event) =>{
-       // $("body").append("div");
         $("body").append(todoCard);
-        console.log("CLICKED");
     });
 
     let todoCard = `
-    <div class="grid-container">
-    <center><div data-closable="fade-out" class="todo-list-card card">
-    <div class="card-divider">
-        <h3>To Do List</h3>
-        <button class="close-button" data-close>x</button>
-    </div>
-    <div class="card-section">
-        <ul>
-        <li><input id="item1" type="checkbox"></input><label for="item1"></label>Item 1</li>
-        <li><input id="item2" type="checkbox"></input><label for="item2"></label>Item 2</li>
-        <li><input id="item3" type="checkbox"></input><label for="item3"></label>Item 3</li>
-        <li><input id="item4" type="checkbox"></input><label for="item4"></label>Item 4</li>
-        <li><input id="item5" type="checkbox"></input><label for="item5"></label>Item 5</li>
-        <li><input id="item6" type="checkbox"></input><label for="item6"></label>Item 6</li>
-        </ul>
 
-    </div>
+    <div class="grid-x grid-padding-x">
+    <div class="large-6 large-pull-6 cell">
 
-    </div>
+        <div class="card card-tabs large-6">
+
+            <div class="card-divider">
+              <center><h6>Title</h6></center>
+              <ul class="tabs menu align-right" data-active-collapse="true" data-tabs id="collapsing-tabs">
+                <!-- note: these need to be in reverse order because of the align-right setting in .menu -->
+                <li class="tabs-title"><a href="#panel3c">
+                  <i class="fa fa-cog" aria-hidden="true"></i> Settings
+                </a></li>
+                <li class="tabs-title"><a href="#panel2c">
+                <i class="fa fa-area-chart" aria-hidden="true"></i>
+                  Stats
+                </a></li>
+                <li class="tabs-title is-active"><a href="#panel1c" aria-selected="true"><i class="fa fa-home" aria-hidden="true"></i>
+                 Home</a></li>
+               </ul>
+             </div>
+        
+             <div class="tabs-content" data-tabs-content="collapsing-tabs">
+        
+              <div class="tabs-panel is-active" id="panel1c">
+                <img src="http://lorempixel.com/485/248/cats/7/">
+                <div class="card-section">
+                  <h4>This is a card.</h4>
+                  <p>It has an easy to override visual style, and is appropriately subdued.</p>
+                </div>
+              </div>
+        
+              <div class="tabs-panel" id="panel2c">
+                <div class="card-section">
+                  <h4>This is a card.</h4>
+                  <p>It has an easy to override visual style, and has a cat on the bottom.</p>
+                </div>
+                <img src="http://lorempixel.com/485/248/cats/5/">
+              </div>
+        
+              <div class="tabs-panel" id="panel3c">
+                <div class="card-section">
+                  <h4>This is a card.</h4>
+                  <img src="http://lorempixel.com/485/248/cats/6/">
+                  <p>It has an easy to override visual style, it has an image in the card section.</p>
+                </div>
+              </div>
+        
+            </div>
+        </div>
     </div>`
 }

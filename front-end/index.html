@@ -17,51 +17,65 @@
     <script defer src="js/vendor/card.js"></script>
   </head>
 
-  <body>
-    <div class="mobile-nav-bar title-bar">
-      <div class="title-bar-left">
-        <button type="button"><img src="./resources/hamburgerMenu.svg"></button>
-        <span class="title-bar-text todoText">ToDo</span>
-      </div>
+        <div class="mobile-nav-bar title-bar">
+          <div class="title-bar-left">
+            <button type="button"><img src="./resources/hamburgerMenu.svg"></button>
+            <span class="title-bar-text todoText">ToDo</span>
+          </div>
+    
+          <div class="title-bar-right">
+            <button type="button" data-open="firstModal"><img src="./resources/plusSign.svg"></button>
+            
+            <button><img data-open="secondModal" src="./resources/expandSign.svg"></button>
+           </div>
+        </div> 
 
-      <div class="title-bar-right">
-        <button type="button" data-open="firstModal"><img src="./resources/plusSign.svg"></button>
-        
-        <button><img data-open="secondModal" src="./resources/expandSign.svg"></button>
-       </div>
-      
+  <div class="grid-x grid-margin-x medium-up-3 large-up-4">
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
+      <div class="cell">
+        <img class="thumbnail" src="https://placehold.it/550x550">
+      </div>
     </div>
-
-    <div class="button-group align-center">
+        
+    
+    <div id="firstModal" class="reveal reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+        <div class="listTitleBox">
+          <h2 id="firstModalTitle">List title:&nbsp </h2>
+          <input type="text">
+        </div>
+        <center><a href="#" data-close data-reveal-id="firstModal" class="secondary button" id ="createListButton">Create List</a></center>
       </div>
-
-      
-
-<!-- Reveal Modals begin -->
-<div id="firstModal" class="reveal reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-  <div class="listTitleBox">
-    <h2 id="firstModalTitle">List title:&nbsp </h2>
-    <input type="text">
-  </div>
-  <center><a href="#" data-close data-reveal-id="firstModal" class="secondary button" id ="createListButton">Create List</a></center>
-  <!-- <button data-close class="button">Cancel</button> -->
-</div>
-
-<!-- <div id="secondModal" class="reveal reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-    <div class="listTitleBox">
-        <h2 id="firstModalTitle">List title &nbsp </h2>
-      
-      </div>
-      <div>thing</div>
-</div>
-
-<div id="videoModal" class="reveal reveal-modal large" data-reveal aria-labelledby="videoModalTitle" aria-hidden="true" role="dialog">
-  <h2 id="videoModalTitle">This modal has video</h2>
-  <div class="flex-video widescreen vimeo">
-    <iframe width="1280" height="720" src="//www.youtube-nocookie.com/embed/wnXCopXXblE?rel=0" frameborder="0" allowfullscreen></iframe>
-  </div> -->
-
-</div>
-
-  </body>
+   </body>
 </html>
