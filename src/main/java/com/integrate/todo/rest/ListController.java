@@ -1,12 +1,13 @@
 package com.integrate.todo.rest;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.ls.LSException;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
@@ -63,4 +64,16 @@ public class ListController {
                 return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
             return new ResponseEntity<>(this.service.archiveList(list), HttpStatus.OK);
         }
+
+    @GetMapping("/listItems/{listID}")
+    public @ResponseBody
+    ResponseEntity<List> getListItems( @PathVariable Integer listID ) {
+        List<Item> itemList = this.service.getListItems( listID );
+        if(itemList.isEmpty())
+            return new ResponseEntity<>( itemList, HttpStatus.NO_CONTENT);
+        if(itemList.get(0).getItemID() == -1 ) {
+            return new ResponseEntity<>( itemList, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>( itemList, HttpStatus.OK );
+    }
 }

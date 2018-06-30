@@ -1,10 +1,11 @@
 package com.integrate.todo.rest;
 
 import com.integrate.todo.Item;
-import com.integrate.todo.Item;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -87,5 +88,88 @@ public class ItemControllerTest {
 
         assertThat( resultItem )
                 .isEqualTo( expectedResponse );
+    }
+
+    @Test
+    public void updateItemTitle_updatesItemTitle_returnsHttpStatus200() {
+        ItemService mockService = mock( ItemService.class );
+        ItemController itemController = new ItemController(mockService);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        int expectedID = 3;
+        int expectedListID = 4;
+        String expectedDescription = "Specific value";
+
+        hashMap.put("itemID", expectedID);
+        hashMap.put("newListID", expectedListID);
+        hashMap.put("newDescription", expectedDescription);
+
+        Item inputItem = new Item()
+                .setItemID(expectedID)
+                .setListID(expectedListID)
+                .setDescription(expectedDescription);
+
+        Item expectedItem = new Item()
+                .setItemID(expectedID)
+                .setListID(expectedListID)
+                .setDescription(expectedDescription);
+
+        when (mockService.updateItem(inputItem))
+                .thenReturn( expectedItem );
+
+        ResponseEntity<Item> responseEntity = itemController.updateItem(hashMap);
+
+        Item body = responseEntity.getBody();
+
+        verify(mockService).updateItem(inputItem);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(body.getDescription()).isEqualTo(expectedDescription);
+        assertThat(body.getListID()).isEqualTo(expectedListID);
+        assertThat(body.getItemID()).isEqualTo(expectedID);
+
+    }
+
+    @Test
+    public void updateItemTitle_DoesNOTupdateItem_returnsHttpStatus304(){
+        ItemService mockService = mock( ItemService.class );
+        ItemController itemController = new ItemController(mockService);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        int inputID = 3;
+        int inputListID = 4;
+        String inputDescription = "Specific value";
+
+        int expectedID = -1;
+        int expectedListID = 0;
+        String expectedDescription = "";
+
+        hashMap.put("itemID", inputID);
+        hashMap.put("newListID", inputListID);
+        hashMap.put("newDescription", inputDescription);
+
+        Item inputItem = new Item()
+                .setItemID(inputID)
+                .setListID(inputListID)
+                .setDescription(inputDescription);
+
+        Item expectedItem = new Item()
+                .setItemID(expectedID)
+                .setListID(expectedListID)
+                .setDescription(expectedDescription);
+
+        when (mockService.updateItem(inputItem))
+                .thenReturn( expectedItem );
+
+        ResponseEntity<Item> responseEntity = itemController.updateItem(hashMap);
+        Item body = responseEntity.getBody();
+
+        verify(mockService).updateItem(inputItem);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_MODIFIED);
+        assertThat(body.getItemID()).isEqualTo(expectedID);
+
     }
 }

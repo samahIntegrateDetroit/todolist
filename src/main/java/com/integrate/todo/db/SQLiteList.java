@@ -1,5 +1,6 @@
 package com.integrate.todo.db;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class SQLiteList implements DBWrapperList {
@@ -113,4 +116,35 @@ public class SQLiteList implements DBWrapperList {
         return todoList;
 
     }
+
+    @Override
+    public List<Item> getListItemsByID(int listID) {
+        List<Item> itemList = new LinkedList<>();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * from Item WHERE LIST_ID=" + listID + ";"
+            );
+            while( resultSet.next() == true) {
+                Item item = new Item();
+                item.setItemID(resultSet.getInt("ID"));
+                item.setListID(resultSet.getInt("LIST_ID"));
+                item.setDescription(resultSet.getString("DESCRIPTION"));
+                itemList.add(item);
+            }
+            statement.close();
+            return itemList;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Item failedItem = new Item();
+        failedItem.setItemID(-1);
+        itemList.add(failedItem);
+        return itemList;
+    }
+
 }

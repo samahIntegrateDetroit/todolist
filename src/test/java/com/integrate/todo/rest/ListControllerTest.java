@@ -1,11 +1,14 @@
 package com.integrate.todo.rest;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -208,5 +211,95 @@ public class ListControllerTest {
 
         assertThat( resultList )
                 .isEqualTo( expectedResponse );
+    }
+
+    @Test
+    public void getListItems_returnsListOfItemsAndHttpStatus200(){
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        int inputListID = 1;
+        List<Item> expectedItemList = new LinkedList<>();
+
+        int expectedItemID = 1;
+        int expectedListID = 2;
+        String expectedDescription = "Specific value";
+
+        Item expected_item = new Item()
+                .setItemID(expectedItemID)
+                .setListID(expectedListID)
+                .setDescription(expectedDescription);
+
+        expectedItemList.add(expected_item);
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedItemList, HttpStatus.OK);
+
+        when( mockService.getListItems(inputListID) )
+                .thenReturn( expectedItemList );
+
+        ResponseEntity<List> result = todoListController.getListItems(inputListID);
+
+        verify( mockService )
+                .getListItems(inputListID);
+
+        assertThat( result )
+                .isEqualTo( expectedResponse );
+
+    }
+
+    @Test
+    public void getListItems_returnsEmptyListAndHttpStatus204(){
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        int inputListID = 5;
+        List<Item> expectedItemList = new LinkedList<>();
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedItemList, HttpStatus.NO_CONTENT);
+
+        when( mockService.getListItems(inputListID) )
+                .thenReturn( expectedItemList );
+
+        ResponseEntity<List> result = todoListController.getListItems(inputListID);
+
+        verify( mockService )
+                .getListItems(inputListID);
+
+        assertThat( result )
+                .isEqualTo( expectedResponse );
+
+    }
+
+    @Test
+    public void getListItems_returnsListWithNegativeItemAndHttpStatus500(){
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        int inputListID = 5;
+        List<Item> expectedItemList = new LinkedList<>();
+
+        int expectedItemID = -1;
+
+        Item expected_item = new Item()
+                .setItemID(expectedItemID);
+
+        expectedItemList.add(expected_item);
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedItemList, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        when( mockService.getListItems(inputListID) )
+                .thenReturn( expectedItemList );
+
+        ResponseEntity<List> result = todoListController.getListItems(inputListID);
+
+        verify( mockService )
+                .getListItems(inputListID);
+
+        assertThat( result )
+                .isEqualTo( expectedResponse );
+
     }
 }

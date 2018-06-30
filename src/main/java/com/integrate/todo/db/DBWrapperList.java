@@ -1,6 +1,9 @@
 package com.integrate.todo.db;
 
+import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
+
+import java.util.List;
 
 public interface DBWrapperList {
 
@@ -11,4 +14,6 @@ public interface DBWrapperList {
     TodoList updateListTitle(Integer listID, String newTitle);
 
     TodoList archiveListById(TodoList todoList);
+
+    List<Item> getListItemsByID(int listID);
 }

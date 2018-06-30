@@ -40,7 +40,7 @@ public class ItemController {
     @PutMapping("/{id}")
     public @ResponseBody
     ResponseEntity<Item> updateItem(
-            @PathVariable Integer id,
+            //@PathVariable Integer id,
             @RequestBody Map<String, Object> newItem
     ) {
         Item inputItem = new Item();
@@ -48,10 +48,10 @@ public class ItemController {
         inputItem.setListID((int)newItem.get("newListID"));
         inputItem.setDescription((String)newItem.get("newDescription"));
 
-        Item item = this.service.getItem((int)newItem.get("itemID"));
-        if(item.getItemID() == -1 ){
-            return new ResponseEntity<>( inputItem, HttpStatus.NOT_MODIFIED );}
+        Item updatedItem = this.service.updateItem(inputItem);
+        if(updatedItem.getItemID() == -1 ){
+            return new ResponseEntity<>( updatedItem, HttpStatus.NOT_MODIFIED );}
 
-        return new ResponseEntity<>(this.service.updateItem(inputItem), HttpStatus.OK);
+        return new ResponseEntity<>(updatedItem, HttpStatus.OK);
     }
 }
