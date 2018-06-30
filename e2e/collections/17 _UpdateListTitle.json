@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cdbc63b6-6968-4a51-9cec-43b4b264054d",
+		"_postman_id": "147fc7b7-a1f9-4de1-b2dd-aa3d58a73fd7",
 		"name": "17 _Update List Title",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -37,7 +37,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\",\n  \"id\": {{id}}\n}"
+							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/list/220000",
@@ -149,7 +149,7 @@
 							"raw": "{\n  \"updatedTitle\": \"{{updatedTitle}}\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/list/9",
+							"raw": "http://localhost:8080/list/{{id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -157,7 +157,7 @@
 							"port": "8080",
 							"path": [
 								"list",
-								"9"
+								"{{id}}"
 							]
 						}
 					},

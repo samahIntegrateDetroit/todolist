@@ -1,0 +1,16 @@
+{
+  "id": "07a75cd1-4e8c-4e62-a2b6-dd809e469ac0",
+  "name": "updateList",
+  "values": [
+    {
+      "key": "updatedTitle",
+      "value": "this is an updated title",
+      "description": "",
+      "type": "text",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-06-30T19:44:57.980Z",
+  "_postman_exported_using": "Postman/6.1.4"
+}
