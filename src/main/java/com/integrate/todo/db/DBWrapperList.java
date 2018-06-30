@@ -16,4 +16,6 @@ public interface DBWrapperList {
     TodoList archiveListById(TodoList todoList);
 
     List<Item> getListItemsByID(int listID);
+
+    TodoList deleteList(int listID);
 }

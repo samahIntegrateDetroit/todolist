@@ -2,6 +2,7 @@ package com.integrate.todo.db;
 
 import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
+import com.integrate.todo.rest.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -114,6 +115,31 @@ public class SQLiteList implements DBWrapperList {
         todoList.setArchiveStatus("");
         todoList.setListID(-1);
         return todoList;
+
+    }
+
+    @Override
+    public TodoList deleteList(int listID) {
+        int result = 0;
+        TodoList listToBeDeleted = findListById(listID);
+        if (listToBeDeleted.getListID() > -1) {
+
+            try {
+                Connection connection = dataSource.getConnection();
+                Statement statement = connection.createStatement();
+                result = statement.executeUpdate(
+                        "DELETE FROM List WHERE ID = " + listToBeDeleted.getListID() + ";"
+                );
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (result == 0) {
+            listToBeDeleted.setListID(-1);
+        }
+        return listToBeDeleted;
 
     }
 

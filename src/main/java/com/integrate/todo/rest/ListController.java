@@ -2,6 +2,7 @@ package com.integrate.todo.rest;
 
 import com.integrate.todo.Item;
 import com.integrate.todo.TodoList;
+import com.integrate.todo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,15 @@ public class ListController {
             return new ResponseEntity<>(this.service.updateList(id, newTitle.get("updatedTitle").toString()), HttpStatus.OK);
         }
 
-        @DeleteMapping
-        public void deleteList() {
 
+        @DeleteMapping("/{id}")
+        public @ResponseBody
+        ResponseEntity<TodoList> deleteListById(@PathVariable Integer id ) {
+            TodoList listToBeDeleted = this.service.deleteList(id);
+            if (listToBeDeleted.getListID() == -1) {
+                return new ResponseEntity<>(listToBeDeleted, HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(listToBeDeleted, HttpStatus.GONE);
         }
 
         @PutMapping("archive/{listID}")

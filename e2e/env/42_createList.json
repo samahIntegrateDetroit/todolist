@@ -1,27 +1,15 @@
 {
-  "id": "5ac7cc1c-7808-4407-a600-a46c3982cec9",
-  "name": "createList",
+  "id": "88a48169-ae15-4bf9-a2a6-42dfe7138308",
+  "name": "42_Create_List",
   "values": [
     {
       "key": "title",
-      "value": "meow",
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "newTitleCount",
-      "value": 0,
-      "enabled": true,
-      "type": "text"
-    },
-    {
-      "key": "newTitle",
-      "value": "newTitle0",
+      "value": "Untitled",
       "enabled": true,
       "type": "text"
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2018-06-30T19:40:09.287Z",
-  "_postman_exported_using": "Postman/6.1.4"
+  "_postman_exported_at": "2018-06-30T20:42:20.598Z",
+  "_postman_exported_using": "Postman/6.0.10"
 }

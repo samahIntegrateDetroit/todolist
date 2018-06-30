@@ -302,4 +302,26 @@ public class ListControllerTest {
                 .isEqualTo( expectedResponse );
 
     }
+
+    @Test
+    public void deleteList_deletesListById_returnsHttpStatus410(){
+        ListService mockService = mock( ListService.class );
+        ListController mockController = new ListController( mockService );
+
+        TodoList expectedList = new TodoList();
+        expectedList.setListID(1);
+        int expectedID = expectedList.getListID();
+
+        when(mockService.deleteList(expectedID)).thenReturn(expectedList);
+
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedList, HttpStatus.GONE);
+
+        ResponseEntity<TodoList> responseEntity = mockController.deleteListById(expectedID);
+
+        verify(mockService).deleteList(expectedID);
+
+        assertThat(responseEntity).isEqualTo( expectedResponseEntity );
+
+    }
 }
