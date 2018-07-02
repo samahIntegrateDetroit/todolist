@@ -69,6 +69,9 @@ public class ListController {
             TodoList list = this.service.getList(listID);
             if(list.getListID() == -1 )
                 return new ResponseEntity<>( list, HttpStatus.NOT_MODIFIED);
+            if(list.getListID() == -2 )
+                return new ResponseEntity<>( list, HttpStatus.INTERNAL_SERVER_ERROR);
+
             return new ResponseEntity<>(this.service.archiveList(list), HttpStatus.OK);
         }
 

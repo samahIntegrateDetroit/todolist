@@ -78,9 +78,13 @@ public class SQLiteList implements DBWrapperList {
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate(
+            int updateCount = statement.executeUpdate(
                     "UPDATE List SET LIST_NAME = '" + newTitle + "' WHERE ID = " + listID + ";"
             );
+            if(updateCount==0){
+                todoList.setTitle("");
+                todoList.setListID(-1);
+            }
             statement.close();
             todoList.setTitle(newTitle);
             return todoList;
@@ -89,7 +93,7 @@ public class SQLiteList implements DBWrapperList {
             e.printStackTrace();
         }
         todoList.setTitle("");
-        todoList.setListID(-1);
+        todoList.setListID(-2);
         return todoList;
 
     }

@@ -212,6 +212,31 @@ public class ListControllerTest {
         assertThat( resultList )
                 .isEqualTo( expectedResponse );
     }
+    @Test
+    public void archiveList_returnsNegativeTwoAndHttpStatus500(){
+        int expectedListID = -2;
+        int listIDToPassIn = 5;
+
+        ListService mockService = mock( ListService.class );
+        ListController todoListController = new ListController( mockService );
+
+        TodoList expectedTodoList = new TodoList()
+                .setListID(expectedListID);
+
+        ResponseEntity expectedResponse = new ResponseEntity<>(
+                expectedTodoList, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        when( mockService.getList(listIDToPassIn) )
+                .thenReturn( expectedTodoList );
+
+        ResponseEntity<TodoList> resultList = todoListController.archiveList(listIDToPassIn);
+
+        verify( mockService )
+                .getList(listIDToPassIn );
+
+        assertThat( resultList )
+                .isEqualTo( expectedResponse );
+    }
 
     @Test
     public void getListItems_returnsListOfItemsAndHttpStatus200(){
