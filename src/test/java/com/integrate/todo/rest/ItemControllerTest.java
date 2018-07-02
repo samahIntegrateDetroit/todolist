@@ -124,8 +124,8 @@ public class ItemControllerTest {
         String expectedDescription = "Specific value";
 
         hashMap.put("itemID", expectedID);
-        hashMap.put("newListID", expectedListID);
-        hashMap.put("newDescription", expectedDescription);
+        hashMap.put("listID", expectedListID);
+        hashMap.put("description", expectedDescription);
 
         Item inputItem = new Item()
                 .setItemID(expectedID)
@@ -154,7 +154,7 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void updateItemTitle_DoesNOTupdateItem_returnsHttpStatus304(){
+    public void updateItem_DoesNOTupdateItem_returnsHttpStatus304(){
         ItemService mockService = mock( ItemService.class );
         ItemController itemController = new ItemController(mockService);
 
@@ -169,8 +169,8 @@ public class ItemControllerTest {
         String expectedDescription = "";
 
         hashMap.put("itemID", inputID);
-        hashMap.put("newListID", inputListID);
-        hashMap.put("newDescription", inputDescription);
+        hashMap.put("listID", inputListID);
+        hashMap.put("description", inputDescription);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
@@ -191,6 +191,48 @@ public class ItemControllerTest {
         verify(mockService).updateItem(inputItem);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_MODIFIED);
+        assertThat(body.getItemID()).isEqualTo(expectedID);
+
+    }
+
+    @Test
+    public void updateItem_returnsWithNegativeTwoAndHttpStatus500(){
+        ItemService mockService = mock( ItemService.class );
+        ItemController itemController = new ItemController(mockService);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        int inputID = 3;
+        int inputListID = 4;
+        String inputDescription = "Specific value";
+
+        int expectedID = -2;
+        int expectedListID = 0;
+        String expectedDescription = "";
+
+        hashMap.put("itemID", inputID);
+        hashMap.put("listID", inputListID);
+        hashMap.put("description", inputDescription);
+
+        Item inputItem = new Item()
+                .setItemID(inputID)
+                .setListID(inputListID)
+                .setDescription(inputDescription);
+
+        Item expectedItem = new Item()
+                .setItemID(expectedID)
+                .setListID(expectedListID)
+                .setDescription(expectedDescription);
+
+        when (mockService.updateItem(inputItem))
+                .thenReturn( expectedItem );
+
+        ResponseEntity<Item> responseEntity = itemController.updateItem(hashMap);
+        Item body = responseEntity.getBody();
+
+        verify(mockService).updateItem(inputItem);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(body.getItemID()).isEqualTo(expectedID);
 
     }

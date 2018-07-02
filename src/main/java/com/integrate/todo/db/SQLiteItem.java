@@ -77,9 +77,11 @@ public class SQLiteItem implements DBWrapperItem {
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate(
-                    "UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"' WHERE ID = " + itemID + ";"
-            );
+            int updateCount = statement.executeUpdate("UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"' WHERE ID = " + itemID + ";" );
+            if(updateCount==0){
+                item.setDescription("");
+                item.setItemID(-1);
+            }
             statement.close();
             return item;
         }
@@ -87,7 +89,7 @@ public class SQLiteItem implements DBWrapperItem {
             e.printStackTrace();
         }
         item.setDescription("");
-        item.setItemID(-1);
+        item.setItemID(-2);
         return item;
 
     }
