@@ -1,0 +1,21 @@
+{
+  "id": "f3b00935-bed0-49a2-ac45-2a41abeb6e4c",
+  "name": "fictionalLists",
+  "values": [
+    {
+      "key": "title",
+      "value": "Zaaras list",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "id",
+      "value": 1,
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-07-02T21:54:23.704Z",
+  "_postman_exported_using": "Postman/6.0.10"
+}
