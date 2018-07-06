@@ -1,7 +1,6 @@
 package com.integrate.todo.db;
 
 import com.integrate.todo.Item;
-import com.integrate.todo.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,17 +16,17 @@ public class SQLiteItem implements DBWrapperItem {
     @Autowired
     DataSource dataSource;
 
-
     @Override
     public Item createItem(Item item) {
         Integer listID = item.getListID();
         String description = item.getDescription();
+        Long dueDate = item.getDueDate();
 
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "INSERT INTO Item (LIST_ID, DESCRIPTION) VALUES ('" + listID + "','" + description + "')"
+                    "INSERT INTO Item (LIST_ID, DESCRIPTION, DUE_DATE) VALUES ('" + listID + "','" + description + "','"+ dueDate + "')"
             );
             statement.close();
             statement = connection.createStatement();
@@ -59,6 +58,7 @@ public class SQLiteItem implements DBWrapperItem {
                 item.setItemID( resultSet.getInt( "ID" ) );
                 item.setListID((resultSet.getInt("LIST_ID")));
                 item.setDescription( resultSet.getString( "DESCRIPTION" ) );
+                item.setDueDate(resultSet.getLong("DUE_DATE"));
             }
             connection.close();
             return item;
@@ -73,11 +73,12 @@ public class SQLiteItem implements DBWrapperItem {
         int itemID = item.getItemID();
         int newListID = item.getListID();
         String newDescription = item.getDescription();
+        long dueDate = item.getDueDate();
 
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            int updateCount = statement.executeUpdate("UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"' WHERE ID = " + itemID + ";" );
+            int updateCount = statement.executeUpdate("UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"', DUE_DATE = '" + dueDate + "' WHERE ID = " + itemID + ";" );
             if(updateCount==0){
                 item.setDescription("");
                 item.setItemID(-1);
@@ -93,4 +94,5 @@ public class SQLiteItem implements DBWrapperItem {
         return item;
 
     }
+
 }

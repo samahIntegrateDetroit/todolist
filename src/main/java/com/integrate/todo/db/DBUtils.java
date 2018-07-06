@@ -82,6 +82,7 @@ public class DBUtils {
                             "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                             "LIST_ID INTEGER not null, " +
                             "DESCRIPTION TEXT not null, " +
+                            "DUE_DATE NUMERIC , " +
                             "CONSTRAINT List_Item " +
                             "FOREIGN KEY (LIST_ID) " +
                             "REFERENCES List(ID) " +

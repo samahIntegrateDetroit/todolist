@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "9b388ce6-b3c2-436f-9e34-bfe57370efed",
+		"name": "15_10_Add_Item",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54fe2779-eafc-4bbc-b597-dc99264be041",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Item added with given list ID and description\", function () {",
+							"    var description = pm.environment.get(\"description\");",
+							"    var listID = parseInt(pm.environment.get(\"listID\"));",
+							"    var dueDate = parseInt(pm.environment.get(\"dueDate\"));",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.expect(jsonData.listID).to.equal(listID);",
+							"    pm.expect(jsonData.description).to.equal(description);",
+							"    pm.expect(jsonData.dueDate).to.equal(dueDate);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e7c722e-bd86-458e-b6aa-802d205dd9e2",
+						"type": "text/javascript",
+						"exec": [
+							"    var datein = new Date(\"Jul 2 2018\").getTime();",
+							"    pm.environment.set(\"dueDate\", datein );"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listID\": {{listID}},\n\t\"description\": \"{{description}}\",\n\t\"dueDate\": {{dueDate}}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/list/item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list",
+						"item"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
