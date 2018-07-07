@@ -35,7 +35,7 @@ public class ItemController {
     public @ResponseBody
     ResponseEntity<Item> readItem(@PathVariable Integer id ) {
         Item list = this.service.getItem( id );
-        if(list.getItemID() == -1 )
+        if (list.getItemID() == -1 )
             return new ResponseEntity<>( list, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>( list, HttpStatus.OK );
     }
@@ -52,12 +52,12 @@ public class ItemController {
         inputItem.setDescription((String)newItem.get("description"));
         inputItem.setDueDate((long)newItem.get("dueDate"));
 
-        inputItem.setStatus((int)newItem.get("newStatus"));
+        inputItem.setStatus((int)newItem.get("status"));
 
         Item updatedItem = this.service.updateItem(inputItem);
         if (updatedItem.getItemID() == -1 ) {
             return new ResponseEntity<>( updatedItem, HttpStatus.NOT_MODIFIED );}
-        if(updatedItem.getItemID() == -2 ){
+        if (updatedItem.getItemID() == -2 ){
             return new ResponseEntity<>( updatedItem, HttpStatus.INTERNAL_SERVER_ERROR );}
 
         return new ResponseEntity<>(updatedItem, HttpStatus.OK);

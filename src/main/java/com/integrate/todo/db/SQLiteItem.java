@@ -21,7 +21,7 @@ public class SQLiteItem implements DBWrapperItem {
         Integer listID = item.getListID();
         String description = item.getDescription();
         Long dueDate = item.getDueDate();
-        int status = item.getStatus();
+        Integer status = item.getStatus();
 
         try {
             Connection connection = dataSource.getConnection();
@@ -60,6 +60,7 @@ public class SQLiteItem implements DBWrapperItem {
                 item.setListID((resultSet.getInt("LIST_ID")));
                 item.setDescription( resultSet.getString( "DESCRIPTION" ) );
                 item.setDueDate(resultSet.getLong("DUE_DATE"));
+                item.setStatus(resultSet.getInt("STATUS"));
             }
             connection.close();
             return item;
@@ -75,12 +76,13 @@ public class SQLiteItem implements DBWrapperItem {
         int newListID = item.getListID();
         String newDescription = item.getDescription();
         long dueDate = item.getDueDate();
+        int status = item.getStatus();
 
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
-            int updateCount = statement.executeUpdate("UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"', DUE_DATE = '" + dueDate + "' WHERE ID = " + itemID + ";" );
-            if(updateCount==0){
+            int updateCount = statement.executeUpdate("UPDATE Item SET LIST_ID = '" + newListID + "', DESCRIPTION = '"+ newDescription +"', DUE_DATE = '" + dueDate + "', STATUS = '" + status + "' WHERE ID = " + itemID + ";" );
+            if (updateCount == 0){
                 item.setDescription("");
                 item.setItemID(-1);
             }
