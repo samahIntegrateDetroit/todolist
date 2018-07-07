@@ -1,4 +1,6 @@
 
+    
+
 QUnit.test("button click sends information to DB", function() {
   var spy;
 
@@ -13,4 +15,11 @@ QUnit.test("button click sends information to DB", function() {
   equal(spy.args[0][1], "http://localhost:8080/list")
   spy.restore();
 
+});
+
+
+QUnit.test("list title field initially 'Enter title here'", function(){
+  const input = document.querySelector('#titleInput');
+  console.log(input)
+  equal(input.value, "Enter title here", "Initial list text is prompt");
 });
