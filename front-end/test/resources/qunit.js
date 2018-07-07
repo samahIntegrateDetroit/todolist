@@ -1183,13 +1183,13 @@ QUnit.reset = function() {
 	if ( typeof window === "undefined" ) {
 		return;
 	}
+/* Removed default behavior so we can run multiple tests against 1 QUnit fixture */
+	// var fixture = defined.document && document.getElementById &&
+	// 		document.getElementById( "qunit-fixture" );
 
-	var fixture = defined.document && document.getElementById &&
-			document.getElementById( "qunit-fixture" );
-
-	if ( fixture ) {
-		fixture.innerHTML = config.fixture;
-	}
+	// if ( fixture ) {
+	// 	fixture.innerHTML = config.fixture;
+	// }
 };
 
 QUnit.pushFailure = function() {
