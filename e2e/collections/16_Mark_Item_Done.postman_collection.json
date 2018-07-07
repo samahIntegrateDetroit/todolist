@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "6db41143-dc5f-4dfe-ba5e-0f417f4b77b6",
+		"name": "16_Mark_Item_Done",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add item - Incomplete Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77febbe6-9992-4760-9e84-325ff4f74b1f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Item added with given list ID and description\", function () {",
+							"    var description = pm.environment.get(\"description\");",
+							"    var listID = parseInt(pm.environment.get(\"listID\"));",
+							"    var status = parseInt(pm.environment.get(\"status\"))",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var itemID = jsonData.itemID;",
+							"    ",
+							"    pm.environment.set(\"itemID\", itemID);",
+							"    ",
+							"    pm.expect(jsonData.status).to.equal(status);",
+							"    pm.expect(jsonData.listID).to.equal(listID);",
+							"    pm.expect(jsonData.description).to.equal(description);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"listID\": {{listID}},\n\t\"description\": \"{{description}}\",\n\t\"status\": {{status}}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/list/item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"list",
+						"item"
+					]
+				},
+				"description": "Item should have an incomplete status\n"
+			},
+			"response": []
+		}
+	]
+}

@@ -52,8 +52,10 @@ public class ItemController {
         inputItem.setDescription((String)newItem.get("description"));
         inputItem.setDueDate((long)newItem.get("dueDate"));
 
+        inputItem.setStatus((int)newItem.get("newStatus"));
+
         Item updatedItem = this.service.updateItem(inputItem);
-        if(updatedItem.getItemID() == -1 ){
+        if (updatedItem.getItemID() == -1 ) {
             return new ResponseEntity<>( updatedItem, HttpStatus.NOT_MODIFIED );}
         if(updatedItem.getItemID() == -2 ){
             return new ResponseEntity<>( updatedItem, HttpStatus.INTERNAL_SERVER_ERROR );}

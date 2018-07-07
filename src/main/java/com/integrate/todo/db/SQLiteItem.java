@@ -21,12 +21,13 @@ public class SQLiteItem implements DBWrapperItem {
         Integer listID = item.getListID();
         String description = item.getDescription();
         Long dueDate = item.getDueDate();
+        int status = item.getStatus();
 
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "INSERT INTO Item (LIST_ID, DESCRIPTION, DUE_DATE) VALUES ('" + listID + "','" + description + "','"+ dueDate + "')"
+                    "INSERT INTO Item (LIST_ID, DESCRIPTION, DUE_DATE, STATUS) VALUES ('" + listID + "','" + description + "','"+ dueDate + "', '"+ status +"');"
             );
             statement.close();
             statement = connection.createStatement();

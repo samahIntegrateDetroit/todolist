@@ -83,6 +83,7 @@ public class DBUtils {
                             "LIST_ID INTEGER not null, " +
                             "DESCRIPTION TEXT not null, " +
                             "DUE_DATE NUMERIC , " +
+                            "STATUS INTEGER not null, " +
                             "CONSTRAINT List_Item " +
                             "FOREIGN KEY (LIST_ID) " +
                             "REFERENCES List(ID) " +
