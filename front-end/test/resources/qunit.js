@@ -105,7 +105,7 @@ config = {
 
 	// by default, run previously failed tests first
 	// very useful in combination with "Hide passed tests" checked
-	reorder: true,
+	reorder: false,
 
 	// by default, modify document.title when suite is done
 	altertitle: true,
