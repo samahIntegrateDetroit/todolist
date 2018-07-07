@@ -122,20 +122,24 @@ public class ItemControllerTest {
         int expectedID = 3;
         int expectedListID = 4;
         String expectedDescription = "Specific value";
+        long expectedDueDate = 222222222;
 
         hashMap.put("itemID", expectedID);
         hashMap.put("listID", expectedListID);
         hashMap.put("description", expectedDescription);
+        hashMap.put("dueDate", expectedDueDate);
 
         Item inputItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );
@@ -163,24 +167,30 @@ public class ItemControllerTest {
         int inputID = 3;
         int inputListID = 4;
         String inputDescription = "Specific value";
+        long inputDueDate = 222222222;
 
         int expectedID = -1;
         int expectedListID = 0;
         String expectedDescription = "";
+        long expectedDueDate = 222222222;
+
 
         hashMap.put("itemID", inputID);
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
+        hashMap.put("dueDate", inputDueDate);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
                 .setListID(inputListID)
-                .setDescription(inputDescription);
+                .setDescription(inputDescription)
+                .setDueDate(inputDueDate);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );
@@ -205,24 +215,29 @@ public class ItemControllerTest {
         int inputID = 3;
         int inputListID = 4;
         String inputDescription = "Specific value";
+        long inputDueDate = 222222222;
 
         int expectedID = -2;
         int expectedListID = 0;
         String expectedDescription = "";
+        long expectedDueDate = 222222222;
 
         hashMap.put("itemID", inputID);
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
+        hashMap.put("dueDate", inputDueDate);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
                 .setListID(inputListID)
-                .setDescription(inputDescription);
+                .setDescription(inputDescription)
+                .setDueDate(inputDueDate);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );

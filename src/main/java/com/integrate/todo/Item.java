@@ -7,6 +7,24 @@ public class Item {
     private Integer itemID;
     private Integer listID;
     private String description;
+    private Long dueDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(itemID, item.itemID) &&
+                Objects.equals(listID, item.listID) &&
+                Objects.equals(description, item.description) &&
+                Objects.equals(dueDate, item.dueDate);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(itemID, listID, description, dueDate);
+    }
 
     public Integer getItemID() {
         return itemID;
@@ -35,19 +53,12 @@ public class Item {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(itemID, item.itemID) &&
-                Objects.equals(listID, item.listID) &&
-                Objects.equals(description, item.description);
+    public Long getDueDate() {
+        return dueDate;
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(itemID, listID, description);
+    public Item setDueDate(Long dueDate) {
+        this.dueDate = dueDate;
+        return this;
     }
 }

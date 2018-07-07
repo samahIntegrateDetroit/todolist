@@ -8,4 +8,5 @@ public interface DBWrapperItem {
     Item findItemById(int id);
 
     Item updateItem(Item item);
+
 }

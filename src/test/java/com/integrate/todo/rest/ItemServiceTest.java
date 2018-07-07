@@ -5,6 +5,8 @@ import com.integrate.todo.db.SQLiteItem;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Instant;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,19 +31,23 @@ public class ItemServiceTest {
     public void createItem_savesToRepository() {
         int expectedID = 3;
         int expectedItemID = 4;
+        long expectedDueDate = 222222222;
         String expectedDescription = "Specific value";
 
         Item inputItem = new Item()
-                .setItemID(expectedItemID).setDescription(expectedDescription);
+                .setItemID(expectedItemID).setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         Item expectedItem = new Item()
-                .setItemID(expectedID).setItemID(expectedItemID).setDescription(expectedDescription);
+                .setItemID(expectedID).setItemID(expectedItemID).setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
+
 
         when(this.db.createItem(inputItem))
                 .thenReturn(expectedItem);
 
         Item item = this.service.createItem(
-                new Item().setItemID(expectedItemID).setDescription(expectedDescription)
+                new Item().setItemID(expectedItemID).setDescription(expectedDescription).setDueDate(expectedDueDate)
         );
 
         verify(db)
@@ -55,12 +61,14 @@ public class ItemServiceTest {
     public void getItem_returnsItemWithCorrectID() {
         int expectedItemID = 1;
         int expectedListID = 2;
+        long expectedDueDate = 222222222;
         String expectedDescription = "Specific value";
 
         Item expected_item = new Item()
                 .setItemID(expectedItemID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
 
         when(this.db.findItemById(expectedItemID))
@@ -80,20 +88,24 @@ public class ItemServiceTest {
         int inputItemID = 1;
         int inputListID = 2;
         String inputDescription = "New Description";
+        long inputDueDate = 222222222;
 
         Item inputItem = new Item()
                 .setItemID(inputItemID)
                 .setListID(inputListID)
-                .setDescription(inputDescription);
+                .setDescription(inputDescription)
+                .setDueDate(inputDueDate);
 
         int expectedItemID = 1;
         int expectedListID = 2;
         String expectedDescription = "New Description";
+        long expectedDueDate = 222222222;
 
         Item expected_item = new Item()
                 .setItemID(expectedItemID)
                 .setListID(expectedListID)
-                .setDescription(expectedDescription);
+                .setDescription(expectedDescription)
+                .setDueDate(expectedDueDate);
 
         when(this.db.updateItem(inputItem))
                 .thenReturn(expected_item);
