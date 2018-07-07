@@ -12,5 +12,8 @@
   "devDependencies": {
     "npm": "^6.1.0",
     "live-server": "^1.2.0"
+  },
+  "dependencies": {
+    "sinon": "^6.1.2"
   }
 }
