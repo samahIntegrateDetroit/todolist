@@ -6,9 +6,7 @@ QUnit.test("list title field initially 'Enter title here'", function(){
 });
 
 QUnit.test("button click sends information to DB", function() {
-  var spy;
-
-  spy = sinon.spy(request, "post");
+  var spy = sinon.spy(request, "post");
   const input = document.querySelector('#titleInput');
 
   var expectedTitle = "this is new title"
@@ -20,6 +18,6 @@ QUnit.test("button click sends information to DB", function() {
 });
 
 QUnit.test("Create button populates list title with user input from db", function() {
-  
+  var stub = sinon.stub(request, "post").returns()
 });
 

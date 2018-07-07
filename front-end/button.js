@@ -2,7 +2,7 @@ const buttonHandler = () => {
   var listTitle = document.querySelector("#titleInput").value
   request.post({title: listTitle}, "http://localhost:8080/list")
  
-  
+
   //execute query
   //return result in alert window
 }
