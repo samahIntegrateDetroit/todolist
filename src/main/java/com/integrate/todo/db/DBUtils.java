@@ -78,11 +78,12 @@ public class DBUtils {
     private void initializeItemTable(){
         try {
             statement.executeUpdate(
-                    "CREATE TABLE IF NOT EXISTS ITEM(" +
+                    "CREATE TABLE IF NOT EXISTS Item(" +
                             "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                             "LIST_ID INTEGER not null, " +
                             "DESCRIPTION TEXT not null, " +
                             "DUE_DATE NUMERIC , " +
+                            "STATUS INTEGER not null, " +
                             "CONSTRAINT List_Item " +
                             "FOREIGN KEY (LIST_ID) " +
                             "REFERENCES List(ID) " +

@@ -1,6 +1,7 @@
 package com.integrate.todo.rest;
 
 import com.integrate.todo.Item;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ItemControllerTest {
+
+    ItemService mockService;
+    ItemController itemController;
+
+    @Before
+    public void setUp(){
+         mockService = mock( ItemService.class );
+         itemController = new ItemController(mockService);
+    }
+
+
     @Test
     public void createItem_returnsHttpStatusCreated() {
-        ItemService mockService = mock( ItemService.class );
-        ItemController itemController = new ItemController(mockService);
-
         Item expectedItem = new Item().setItemID(999);
         Item itemPassedIn = new Item().setDescription("New Item");
 
@@ -42,9 +51,6 @@ public class ItemControllerTest {
 
     @Test
     public void createItem_returnsHTTPstatus304_whenItemIsNotCreated() {
-        ItemService mockService = mock(ItemService.class);
-        ItemController itemController = new ItemController(mockService);
-
         Item item = new Item ().setDescription("New Item");
         Item expectedItem = new Item().setItemID(-1);
 
@@ -66,9 +72,6 @@ public class ItemControllerTest {
         int expectedListID = 4;
         String expectedDescription = "Specific value";
 
-        ItemService mockService = mock( ItemService.class );
-        ItemController itemController = new ItemController( mockService );
-
         Item expectedItem = new Item().setItemID(expectedID ).setListID(expectedListID).setDescription(expectedDescription);
 
         ResponseEntity expectedResponse = new ResponseEntity<>(
@@ -89,8 +92,6 @@ public class ItemControllerTest {
 
     @Test
     public void getItem_whenDoesntExist_returnsHttpStatus204(){
-        ItemService mockService = mock( ItemService.class );
-        ItemController itemController = new ItemController( mockService );
 
         Item expectedItem = new Item().setItemID( -1 );
         int input_id = 8;
@@ -114,8 +115,6 @@ public class ItemControllerTest {
 
     @Test
     public void updateItemTitle_updatesItemTitle_returnsHttpStatus200() {
-        ItemService mockService = mock( ItemService.class );
-        ItemController itemController = new ItemController(mockService);
 
         HashMap<String, Object> hashMap = new HashMap<>();
 
@@ -123,23 +122,27 @@ public class ItemControllerTest {
         int expectedListID = 4;
         String expectedDescription = "Specific value";
         long expectedDueDate = 222222222;
+        int expectedStatus = Item.ITEM_STATUS_DONE;
 
         hashMap.put("itemID", expectedID);
         hashMap.put("listID", expectedListID);
         hashMap.put("description", expectedDescription);
         hashMap.put("dueDate", expectedDueDate);
+        hashMap.put("status", expectedStatus);
 
         Item inputItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
                 .setDescription(expectedDescription)
-                .setDueDate(expectedDueDate);
+                .setDueDate(expectedDueDate)
+                .setStatus(expectedStatus);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
                 .setDescription(expectedDescription)
-                .setDueDate(expectedDueDate);
+                .setDueDate(expectedDueDate)
+                .setStatus(expectedStatus);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );
@@ -168,29 +171,34 @@ public class ItemControllerTest {
         int inputListID = 4;
         String inputDescription = "Specific value";
         long inputDueDate = 222222222;
+        int inputStatus = Item.ITEM_STATUS_DONE;
 
         int expectedID = -1;
         int expectedListID = 0;
         String expectedDescription = "";
         long expectedDueDate = 222222222;
+        int expectedStatus = Item.ITEM_STATUS_INCOMPLETE;
 
 
         hashMap.put("itemID", inputID);
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
                 .setListID(inputListID)
                 .setDescription(inputDescription)
-                .setDueDate(inputDueDate);
+                .setDueDate(inputDueDate)
+                .setStatus(inputStatus);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
                 .setDescription(expectedDescription)
-                .setDueDate(expectedDueDate);
+                .setDueDate(expectedDueDate)
+                .setStatus(expectedStatus);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );
@@ -216,28 +224,34 @@ public class ItemControllerTest {
         int inputListID = 4;
         String inputDescription = "Specific value";
         long inputDueDate = 222222222;
+        int inputStatus = Item.ITEM_STATUS_DONE;
+
 
         int expectedID = -2;
         int expectedListID = 0;
         String expectedDescription = "";
         long expectedDueDate = 222222222;
+        int expectedStatus = Item.ITEM_STATUS_INCOMPLETE;
 
         hashMap.put("itemID", inputID);
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
                 .setListID(inputListID)
                 .setDescription(inputDescription)
-                .setDueDate(inputDueDate);
+                .setDueDate(inputDueDate)
+                .setStatus(inputStatus);
 
         Item expectedItem = new Item()
                 .setItemID(expectedID)
                 .setListID(expectedListID)
                 .setDescription(expectedDescription)
-                .setDueDate(expectedDueDate);
+                .setDueDate(expectedDueDate)
+                .setStatus(expectedStatus);
 
         when (mockService.updateItem(inputItem))
                 .thenReturn( expectedItem );

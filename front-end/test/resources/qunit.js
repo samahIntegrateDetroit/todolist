@@ -105,7 +105,7 @@ config = {
 
 	// by default, run previously failed tests first
 	// very useful in combination with "Hide passed tests" checked
-	reorder: true,
+	reorder: false,
 
 	// by default, modify document.title when suite is done
 	altertitle: true,
@@ -1183,13 +1183,13 @@ QUnit.reset = function() {
 	if ( typeof window === "undefined" ) {
 		return;
 	}
+/* Removed default behavior so we can run multiple tests against 1 QUnit fixture */
+	// var fixture = defined.document && document.getElementById &&
+	// 		document.getElementById( "qunit-fixture" );
 
-	var fixture = defined.document && document.getElementById &&
-			document.getElementById( "qunit-fixture" );
-
-	if ( fixture ) {
-		fixture.innerHTML = config.fixture;
-	}
+	// if ( fixture ) {
+	// 	fixture.innerHTML = config.fixture;
+	// }
 };
 
 QUnit.pushFailure = function() {

@@ -1,20 +1,27 @@
 package com.integrate.todo;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
+
 import java.util.Objects;
 
 public class Item {
+
+    public static final int ITEM_STATUS_DONE = 0;
+    public static final int ITEM_STATUS_INCOMPLETE = 1;
 
     private Integer itemID;
     private Integer listID;
     private String description;
     private Long dueDate;
+    private int itemStatus = ITEM_STATUS_INCOMPLETE;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(itemID, item.itemID) &&
+        return itemStatus == item.itemStatus &&
+                Objects.equals(itemID, item.itemID) &&
                 Objects.equals(listID, item.listID) &&
                 Objects.equals(description, item.description) &&
                 Objects.equals(dueDate, item.dueDate);
@@ -23,7 +30,7 @@ public class Item {
     @Override
     public int hashCode() {
 
-        return Objects.hash(itemID, listID, description, dueDate);
+        return Objects.hash(itemID, listID, description, dueDate, itemStatus);
     }
 
     public Integer getItemID() {
@@ -53,6 +60,15 @@ public class Item {
         return this;
     }
 
+    public int getStatus() {
+        return itemStatus;
+    }
+
+    public Item setStatus( int status) {
+        this.itemStatus = status;
+        return this;
+    }
+
     public Long getDueDate() {
         return dueDate;
     }
@@ -61,4 +77,6 @@ public class Item {
         this.dueDate = dueDate;
         return this;
     }
+
+
 }
