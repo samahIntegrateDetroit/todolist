@@ -95,4 +95,29 @@ public class SQLiteItem implements DBWrapperItem {
 
     }
 
+    @Override
+    public Item deleteItem(int itemID) {
+        int result = 0;
+        Item itemToBeDeleted = findItemById(itemID);
+        if (itemToBeDeleted.getItemID() > -1) {
+
+            try {
+                Connection connection = dataSource.getConnection();
+                Statement statement = connection.createStatement();
+                result = statement.executeUpdate(
+                        "DELETE FROM Item WHERE ID = " + itemToBeDeleted.getItemID() + ";"
+                );
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (result == 0) {
+            itemToBeDeleted.setItemID(-1);
+        }
+        return itemToBeDeleted;
+
+    }
+
 }

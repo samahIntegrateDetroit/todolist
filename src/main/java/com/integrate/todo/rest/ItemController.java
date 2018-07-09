@@ -60,4 +60,14 @@ public class ItemController {
 
         return new ResponseEntity<>(updatedItem, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public @ResponseBody
+    ResponseEntity<Item> deleteItemById(@PathVariable Integer id ) {
+        Item itemToBeDeleted = this.service.deleteItem(id);
+        if (itemToBeDeleted.getItemID() == -1) {
+            return new ResponseEntity<>(itemToBeDeleted, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(itemToBeDeleted, HttpStatus.GONE);
+    }
 }
