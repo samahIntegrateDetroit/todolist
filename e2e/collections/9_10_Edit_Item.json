@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0b9804d9-1fa6-4f46-bb30-a5f12b42947a",
+						"id": "e654b816-2625-4d19-81ad-d3a15316c3ce",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
@@ -28,6 +28,8 @@
 							"    pm.expect(jsonData.listID).to.equal(listID);",
 							"    pm.expect(jsonData.description).to.equal(description);",
 							"    pm.environment.set(\"itemID\",jsonData.itemID);",
+							"    pm.environment.set(\"listID\",jsonData.listID);",
+							"    ",
 							"});"
 						]
 					}
@@ -112,7 +114,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"itemID\":{{itemID}},\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\": {{dueDate}}\n}"
+					"raw": "{\n\t\"itemID\":{{itemID}},\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\": {{dueDate}},\n\t\"status\": 0\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/list/item",
@@ -157,7 +159,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"itemID\":22222,\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\" : {{dueDate}}\n}"
+					"raw": "{\n\t\"itemID\":22222,\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\" : {{dueDate}},\n\t\"status\" : 0\n\t\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/list/item",
