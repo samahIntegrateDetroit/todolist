@@ -20,14 +20,14 @@ public class SQLiteItem implements DBWrapperItem {
     public Item createItem(Item item) {
         Integer listID = item.getListID();
         String description = item.getDescription();
-        Long dueDate = item.getDueDate();
+        //Long dueDate = item.getDueDate();
         Integer status = item.getStatus();
 
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(
-                    "INSERT INTO Item (LIST_ID, DESCRIPTION, DUE_DATE, STATUS) VALUES ('" + listID + "','" + description + "','"+ dueDate + "', '"+ status +"');"
+                    "INSERT INTO Item (LIST_ID, DESCRIPTION, STATUS) VALUES ('" + listID + "','" + description + "','"+ status +"');"
             );
             statement.close();
             statement = connection.createStatement();
