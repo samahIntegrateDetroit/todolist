@@ -265,4 +265,26 @@ public class ItemControllerTest {
         assertThat(body.getItemID()).isEqualTo(expectedID);
 
     }
+
+    @Test
+    public void deleteItem_deletesItemById_returnsHttpStatus410(){
+        ItemService mockService = mock( ItemService.class );
+        ItemController mockController = new ItemController( mockService );
+
+        Item expectedItem = new Item();
+        expectedItem.setItemID(1);
+        int expectedID = expectedItem.getItemID();
+
+        when(mockService.deleteItem(expectedID)).thenReturn(expectedItem);
+
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedItem, HttpStatus.GONE);
+
+        ResponseEntity<Item> responseEntity = mockController.deleteItemById(expectedID);
+
+        verify(mockService).deleteItem(expectedID);
+
+        assertThat(responseEntity).isEqualTo( expectedResponseEntity );
+
+    }
 }
