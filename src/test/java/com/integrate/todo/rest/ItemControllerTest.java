@@ -128,7 +128,7 @@ public class ItemControllerTest {
         hashMap.put("listID", expectedListID);
         hashMap.put("description", expectedDescription);
         hashMap.put("dueDate", expectedDueDate);
-        hashMap.put("newStatus", expectedStatus);
+        hashMap.put("status", expectedStatus);
 
         Item inputItem = new Item()
                 .setItemID(expectedID)
@@ -184,7 +184,7 @@ public class ItemControllerTest {
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
-        hashMap.put("newStatus", inputStatus);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
@@ -237,7 +237,7 @@ public class ItemControllerTest {
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
-        hashMap.put("newStatus", inputStatus);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
