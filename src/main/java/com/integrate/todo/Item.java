@@ -8,6 +8,7 @@ public class Item {
 
     public static final int ITEM_STATUS_DONE = 0;
     public static final int ITEM_STATUS_INCOMPLETE = 1;
+    public static final int ITEM_STATUS_IN_PROGRESS = 2;
 
     private Integer itemID;
     private Integer listID;
