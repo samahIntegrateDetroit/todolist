@@ -51,7 +51,6 @@ public class ItemController {
         inputItem.setListID((int)newItem.get("listID"));
         inputItem.setDescription((String)newItem.get("description"));
         inputItem.setDueDate((long)newItem.get("dueDate"));
-
         inputItem.setStatus((int)newItem.get("status"));
 
         Item updatedItem = this.service.updateItem(inputItem);
@@ -61,5 +60,15 @@ public class ItemController {
             return new ResponseEntity<>( updatedItem, HttpStatus.INTERNAL_SERVER_ERROR );}
 
         return new ResponseEntity<>(updatedItem, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public @ResponseBody
+    ResponseEntity<Item> deleteItemById(@PathVariable Integer id ) {
+        Item itemToBeDeleted = this.service.deleteItem(id);
+        if (itemToBeDeleted.getItemID() == -1) {
+            return new ResponseEntity<>(itemToBeDeleted, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(itemToBeDeleted, HttpStatus.GONE);
     }
 }

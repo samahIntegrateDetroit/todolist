@@ -9,4 +9,5 @@ public interface DBWrapperItem {
 
     Item updateItem(Item item);
 
+    Item deleteItem(int itemID);
 }

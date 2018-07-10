@@ -128,7 +128,7 @@ public class ItemControllerTest {
         hashMap.put("listID", expectedListID);
         hashMap.put("description", expectedDescription);
         hashMap.put("dueDate", expectedDueDate);
-        hashMap.put("newStatus", expectedStatus);
+        hashMap.put("status", expectedStatus);
 
         Item inputItem = new Item()
                 .setItemID(expectedID)
@@ -184,7 +184,7 @@ public class ItemControllerTest {
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
-        hashMap.put("newStatus", inputStatus);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
@@ -237,7 +237,7 @@ public class ItemControllerTest {
         hashMap.put("listID", inputListID);
         hashMap.put("description", inputDescription);
         hashMap.put("dueDate", inputDueDate);
-        hashMap.put("newStatus", inputStatus);
+        hashMap.put("status", inputStatus);
 
         Item inputItem = new Item()
                 .setItemID(inputID)
@@ -263,6 +263,28 @@ public class ItemControllerTest {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(body.getItemID()).isEqualTo(expectedID);
+
+    }
+
+    @Test
+    public void deleteItem_deletesItemById_returnsHttpStatus410(){
+        ItemService mockService = mock( ItemService.class );
+        ItemController mockController = new ItemController( mockService );
+
+        Item expectedItem = new Item();
+        expectedItem.setItemID(1);
+        int expectedID = expectedItem.getItemID();
+
+        when(mockService.deleteItem(expectedID)).thenReturn(expectedItem);
+
+        ResponseEntity expectedResponseEntity = new ResponseEntity<>(
+                expectedItem, HttpStatus.GONE);
+
+        ResponseEntity<Item> responseEntity = mockController.deleteItemById(expectedID);
+
+        verify(mockService).deleteItem(expectedID);
+
+        assertThat(responseEntity).isEqualTo( expectedResponseEntity );
 
     }
 }

@@ -1,17 +1,17 @@
 {
 	"info": {
-		"_postman_id": "851f0949-1e2c-4077-8404-b05543d7b3a1",
-		"name": "9_10_Edit_Item",
+		"_postman_id": "84ea68a2-776d-4e82-a38e-5d01f5d750b0",
+		"name": "16_Mark_Item_Done",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Add item",
+			"name": "Add item - Incomplete Status",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "e654b816-2625-4d19-81ad-d3a15316c3ce",
+						"id": "77febbe6-9992-4760-9e84-325ff4f74b1f",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
@@ -22,14 +22,17 @@
 							"pm.test(\"Item added with given list ID and description\", function () {",
 							"    var description = pm.environment.get(\"description\");",
 							"    var listID = parseInt(pm.environment.get(\"listID\"));",
+							"    var status = parseInt(pm.environment.get(\"status\"))",
 							"    ",
 							"    var jsonData = pm.response.json();",
 							"    ",
+							"    var itemID = jsonData.itemID;",
+							"    ",
+							"    pm.environment.set(\"itemID\", itemID);",
+							"    ",
+							"    pm.expect(jsonData.status).to.equal(status);",
 							"    pm.expect(jsonData.listID).to.equal(listID);",
 							"    pm.expect(jsonData.description).to.equal(description);",
-							"    pm.environment.set(\"itemID\",jsonData.itemID);",
-							"    pm.environment.set(\"listID\",jsonData.listID);",
-							"    ",
 							"});"
 						]
 					}
@@ -37,10 +40,10 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "a09230f0-34c9-4096-9d7a-df4504de1343",
+						"id": "a616638f-8d5b-433c-bbb8-e7daa9765ec4",
 						"type": "text/javascript",
 						"exec": [
-							"    var datein = new Date(\"Jul 2 2018\").getTime();",
+							"var datein = new Date(\"Jul 2 2018\").getTime();",
 							"    pm.environment.set(\"dueDate\", datein );"
 						]
 					}
@@ -56,7 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"listID\": {{listID}},\n\t\"description\": \"{{description}}\",\n\t\"dueDate\": {{dueDate}}\n\t\n}"
+					"raw": "{\n\t\"listID\": {{listID}},\n\t\"description\": \"{{description}}\",\n\t\"status\": {{status}}\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/list/item",
@@ -69,12 +72,13 @@
 						"list",
 						"item"
 					]
-				}
+				},
+				"description": "Item should have an incomplete status\n"
 			},
 			"response": []
 		},
 		{
-			"name": "Edit an Item",
+			"name": "Mark Item done",
 			"event": [
 				{
 					"listen": "test",
@@ -114,7 +118,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"itemID\":{{itemID}},\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\": {{dueDate}},\n\t\"status\": 0\n}"
+					"raw": "{\n\t\"itemID\":{{itemID}},\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\": {{dueDate}}\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/list/item",
@@ -159,7 +163,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"itemID\":22222,\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\" : {{dueDate}},\n\t\"status\" : 0\n\t\n}"
+					"raw": "{\n\t\"itemID\": 2147483647,\n\t\"listID\": {{listID}},\n\t\"description\": \"{{newDescription}}\",\n\t\"dueDate\": {{dueDate}},\n\t\"status\": {{status}}\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/list/item",

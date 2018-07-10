@@ -25,4 +25,6 @@ public class ItemService {
     public Item updateItem(Item item) {
         return database.updateItem(item);
     }
+
+    public Item deleteItem(int itemID) { return database.deleteItem(itemID); }
 }
