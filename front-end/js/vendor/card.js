@@ -12,19 +12,7 @@
         <div class="card card-tabs large-6">
 
             <div class="card-divider">
-              <center><h6>Title</h6></center>
-              <ul class="tabs menu align-right" data-active-collapse="true" data-tabs id="collapsing-tabs">
-                <!-- note: these need to be in reverse order because of the align-right setting in .menu -->
-                <li class="tabs-title"><a href="#panel3c">
-                  <i class="fa fa-cog" aria-hidden="true"></i> Settings
-                </a></li>
-                <li class="tabs-title"><a href="#panel2c">
-                <i class="fa fa-area-chart" aria-hidden="true"></i>
-                  Stats
-                </a></li>
-                <li class="tabs-title is-active"><a href="#panel1c" aria-selected="true"><i class="fa fa-home" aria-hidden="true"></i>
-                 Home</a></li>
-               </ul>
+              <center><h6 class="listCardTitle">Title</h6></center>
              </div>
         
              <div class="tabs-content" data-tabs-content="collapsing-tabs">
