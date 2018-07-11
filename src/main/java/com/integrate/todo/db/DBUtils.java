@@ -47,8 +47,7 @@ public class DBUtils {
                             "LAST_NAME text NOT NULL, " +
                             "EMAIL text NOT NULL UNIQUE , " +
                             "PASSWORD_HASH text NOT NULL , " +
-                            "SIGNUP_DATE date DEFAULT current_timestamp  , " +
-                            "PREFERENCE INTEGER DEFAULT 0)"
+                            "SIGNUP_DATE date DEFAULT current_timestamp)"
             );
         }
         catch (SQLException e) {

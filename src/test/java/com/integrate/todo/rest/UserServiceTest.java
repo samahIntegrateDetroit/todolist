@@ -32,18 +32,17 @@ public class UserServiceTest {
         String expectedEmail = "zaara0001@example.com";
         String expectedPasswordHash = "password";
         String expectedSignupDate = "6/9/2018";
-        int expectedPreference = 0;
 
-        User inputUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference);
+        User inputUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate);
 
         User expectedUser = new User()
-                .setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference);
+                .setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate);
 
         when(this.db.createUser(inputUser))
                 .thenReturn(expectedUser);
 
         User user = this.service.createUser(
-                new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate,expectedPreference));
+                new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash,expectedSignupDate));
 
 
         verify(db)
@@ -61,8 +60,8 @@ public class UserServiceTest {
         String expectedEmail = "zaara0001@example.com";
         String expectedPasswordHash = "password";
         String expectedSignupDate = "6/9/2018";
-        int expectedPreference = 0;
-        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
+
+        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate);
 
         when(this.db.findUserById(expectedUserID))
                 .thenReturn(expectedUser);
@@ -84,8 +83,8 @@ public class UserServiceTest {
         String expectedEmail = "zaara0001@example.com";
         String expectedPasswordHash = "password";
         String expectedSignupDate = "6/9/2018";
-        int expectedPreference = 0;
-        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate,expectedPreference);
+
+        User expectedUser = new User().setUser(expectedFirstName,expectedLastName,expectedEmail,expectedPasswordHash, expectedSignupDate);
 
         when(this.db.findUserByEmail(expectedEmail))
                 .thenReturn(expectedUser);
