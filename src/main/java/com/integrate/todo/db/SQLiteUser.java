@@ -25,7 +25,6 @@ public class SQLiteUser implements DBWrapperUser {
         String eMail=user.geteMail();
         String passwordHash=user.getPasswordHash();
         String signupDate=user.getSignupDate();
-        int preference=user.getPreference();
         try {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
@@ -35,13 +34,11 @@ public class SQLiteUser implements DBWrapperUser {
                             "LAST_NAME," +
                             "EMAIL," +
                             "PASSWORD_HASH," +
-                            "SIGNUP_DATE," +
-                            "PREFERENCE) VALUES ('" + firstName + "','" +
+                            "SIGNUP_DATE) VALUES ('" + firstName + "','" +
                             lastName + "','" +
                             eMail + "','" +
                             passwordHash + "','" +
-                            signupDate + "','" +
-                            preference + "');"
+                            signupDate + "');"
             );
             statement.close();
             statement = connection.createStatement();
@@ -103,8 +100,6 @@ public class SQLiteUser implements DBWrapperUser {
                 user.setEmail( resultSet.getString( "EMAIL" ) );
                 user.setPasswordHash( resultSet.getString( "PASSWORD_HASH" ) );
                 user.setSignupDate( resultSet.getString( "SIGNUP_DATE" ) );
-                user.setPreference( resultSet.getInt( "PREFERENCE" ) );
-
             }
             connection.close();
             return user;
@@ -133,8 +128,6 @@ public class SQLiteUser implements DBWrapperUser {
                 user.setEmail( resultSet.getString( "EMAIL" ) );
                 user.setPasswordHash( resultSet.getString( "PASSWORD_HASH" ) );
                 user.setSignupDate( resultSet.getString( "SIGNUP_DATE" ) );
-                user.setPreference( resultSet.getInt( "PREFERENCE" ) );
-
             }
             connection.close();
             return user;

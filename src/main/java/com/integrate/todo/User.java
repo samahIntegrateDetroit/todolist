@@ -10,7 +10,6 @@ public class User {
     private String eMail;
     private String passwordHash;
     private String signupDate;
-    private int preference;
 
 
     @Override
@@ -23,14 +22,13 @@ public class User {
                 Objects.equals(lastName, user.lastName) &&
                 Objects.equals(eMail, user.eMail) &&
                 Objects.equals(passwordHash, user.passwordHash) &&
-                Objects.equals(signupDate, user.signupDate) &&
-                Objects.equals(preference, user.preference);
+                Objects.equals(signupDate, user.signupDate);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, firstName, lastName, eMail, passwordHash, signupDate, preference);
+        return Objects.hash(userId, firstName, lastName, eMail, passwordHash, signupDate);
     }
 
     public Integer getUserID() {
@@ -81,22 +79,13 @@ public class User {
         this.signupDate = signupDate;
     }
 
-    public int getPreference() {
-        return preference;
-    }
-
-    public void setPreference( int preference) {
-        this.preference = preference;
-    }
-
-    public User setUser(String firstName, String lastName, String eMail, String passwordHash, String signupDate, int preference) {
+    public User setUser(String firstName, String lastName, String eMail, String passwordHash, String signupDate) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(eMail);
         user.setPasswordHash(passwordHash);
         user.setSignupDate(signupDate);
-        user.setPreference(preference);
         return user;
     }
 
