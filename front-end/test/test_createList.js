@@ -20,15 +20,13 @@ QUnit.test("button click sends information to DB", function() {
 QUnit.test("Create button populates list title with user input from db", function() {
 
 // WIP trying to figure out how to test this.
-  var listInfo = {httpStatus = "201", updatedTitle = "YO"};
-  document.querySelector("#titleInput").value = updatedTitle
-
+  var expectedTitle = "My List";
+  var listInfo = {httpStatus : "201", titleEntered : expectedTitle};
+  var postStub = sinon.stub(request, "post").returns(listInfo);
   var button = document.querySelector('#createListButton').click();
-  var stub = sinon.stub(request, "post").returns(
-     listInfo
-  )
-  var newTitle = document.querySelector('.listCardTitle').value
-  equal(updatedTitle, newTitle,"Title was updated on new card")
+  //console.log(postStub);
+  var actualTitle = document.querySelector('.listCardTitle').innerHTML;
+  equal(actualTitle, expectedTitle, "Title was updated on new card");
 
 });
 
