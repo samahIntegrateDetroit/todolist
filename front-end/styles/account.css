@@ -1,0 +1,16 @@
+.signup {
+    /* display: flex; */
+    width: 35em;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+
+.sign-up-label  {
+    display: inline-block ;
+    padding-right: 20px;
+
+}
+
+.sign-up-header {
+    display: block !important;
+}
