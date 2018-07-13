@@ -1183,7 +1183,7 @@ QUnit.reset = function() {
 	if ( typeof window === "undefined" ) {
 		return;
 	}
-/* Removed default behavior so we can run multiple tests against 1 QUnit fixture */
+/* Removed default behavior so we can run multiple tests against 1 QUnit fixture 7/7/18 (Vaughn & James)*/
 	// var fixture = defined.document && document.getElementById &&
 	// 		document.getElementById( "qunit-fixture" );
 
