@@ -1,51 +1,50 @@
 "use strict";
+ let createListCard;
+
 {
-    var newTitle = "ASD";
+  createListCard = function (newCardId, newTitle) {
 
-    var createListCard = function(newTitle) {
+    let todoCard = `
 
-      let todoCard = `
+    <div class="grid-x grid-padding-x">
+    <div class="large-6 large-pull-6 cell">
 
-      <div class="grid-x grid-padding-x">
-      <div class="large-6 large-pull-6 cell">
+        <div class="card card-tabs large-6">
 
-          <div class="card card-tabs large-6">
-
-              <div class="card-divider">
-                <center><h6 class="listCardTitle">` + newTitle + `</h6></center>
+            <div class="card-divider">
+              <h6 id="list` + newCardId + `" class="listCardTitle">` + newTitle + `</h6>
+            </div>
+        
+            <div class="tabs-content" data-tabs-content="collapsing-tabs">
+        
+              <div class="tabs-panel is-active" id="panel1c">
+                <div class="card-section">
+                  <h4>Task A</h4>
+                  <p>Due date goes here</p>
+                </div>
               </div>
-          
-              <div class="tabs-content" data-tabs-content="collapsing-tabs">
-          
-                <div class="tabs-panel is-active" id="panel1c">
-                  <img src="http://lorempixel.com/485/248/cats/7/">
-                  <div class="card-section">
-                    <h4>This is a card.</h4>
-                    <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                  </div>
+        
+              <div class="tabs-panel" id="panel2c">
+                <div class="card-section">
+                  <h4>Task B</h4>
+                  <p>It has an easy to override visual style, and has a cat on the bottom.</p>
                 </div>
-          
-                <div class="tabs-panel" id="panel2c">
-                  <div class="card-section">
-                    <h4>This is a card.</h4>
-                    <p>It has an easy to override visual style, and has a cat on the bottom.</p>
-                  </div>
-                  <img src="http://lorempixel.com/485/248/cats/5/">
                 </div>
-          
-                <div class="tabs-panel" id="panel3c">
-                  <div class="card-section">
-                    <h4>This is a card.</h4>
-                    <img src="http://lorempixel.com/485/248/cats/6/">
-                    <p>It has an easy to override visual style, it has an image in the card section.</p>
-                  </div>
+        
+              <div class="tabs-panel" id="panel3c">
+                <div class="card-section">
+                  <h4>Task C</h4>
+                  <p>It has an easy to override visual style, it has an image in the card section.</p>
                 </div>
-          
               </div>
-          </div>
-      </div>`
+        
+            </div>
+        </div>
+    </div>`
 
-      $("body").append(todoCard);
-      
-    };
+    $("body").append(todoCard);
+    currId++;
+    
+  };
+  
 }
