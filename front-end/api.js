@@ -1,25 +1,34 @@
 var firstId = 0;
 var currId = firstId;
-
-var request = { post: function (data, url){
-
-  fetch(
-  url,
-  {
-    headers: { 
-      'Accept': 'application/json',
-      'Content-Type': 'application/json' 
-    },
-    body: JSON.stringify(data),
-    method: 'POST', })
-    .then(data => {
-        var requestStatus = data.status;
-      
-        data.json().then(jsonData => {
+// var httpStatus;
+// var getHttpStatus(){
+//   return request.body.;
+// }
+var request = { post: function (data, url, successCallback, failureCallback){
+  
+  return fetch(
+    url,
+    {
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(data),
+      method: 'POST', })
+      .then(data => {
+        // if (data.status == 201) {
+          
+        //   } else {
+        //   failureCallback("sorry")
+        // }
+        //var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
+        // var requestStatus = data.status;
+        data.json()
+        .then(jsonData => {
           var updatedTitle = jsonData.title
-          var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
-          // console.log(listInfo)          
-          return listInfo
+          if (data.status == 201) {
+            successCallback(currId, updatedTitle)
+          }
         })
-    })
+      })
 }}
