@@ -1,3 +1,6 @@
+var firstId = 0;
+var currId = firstId;
+
 var request = { post: function (data, url){
 
   fetch(
@@ -10,7 +13,8 @@ var request = { post: function (data, url){
     body: JSON.stringify(data),
     method: 'POST', })
     .then(data => {
-        var requestStatus = data.status
+        var requestStatus = data.status;
+      
         data.json().then(jsonData => {
           var updatedTitle = jsonData.title
           var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
