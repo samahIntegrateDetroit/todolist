@@ -26,8 +26,8 @@ var request = { post: function (data, url, successCallback, failureCallback){
         data.json()
         .then(jsonData => {
           var updatedTitle = jsonData.title
-          successCallback(currId, updatedTitle)
           if (data.status == 201) {
+            successCallback(currId, updatedTitle)
           }
         })
       })
