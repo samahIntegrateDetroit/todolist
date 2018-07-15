@@ -11,7 +11,7 @@
         <div class="card card-tabs large-6">
     
             <div class="card-divider">
-              <h6 id="list ${newCardId} class="listCardTitle"> ${newTitle} </h6>
+              <h6 id="list${newCardId}" class="listCardTitle"> ${newTitle} </h6>
     
               <ul class="dropdown menu" data-dropdown-menu>
               <li class="is-dropdown-submenu-parent">

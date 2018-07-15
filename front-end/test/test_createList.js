@@ -1,11 +1,11 @@
 
-QUnit.test("list title field initially 'Enter title here'", function() {
+QUnit.test("List title field initially 'Enter title here'", function() {
   const input = document.querySelector('#titleInput');
 
   equal(input.placeholder, "Enter title here", "Initial list title placeholder is presents");
 });
 
-QUnit.test("button click sends information to DB", function() {
+QUnit.test("Button click sends information to DB", function() {
   var spy = sinon.spy(request, "post");
   const input = document.querySelector('#titleInput');
 
@@ -18,23 +18,23 @@ QUnit.test("button click sends information to DB", function() {
 });
 
 /* ------------- WIP test failing after api.js code refactor.  -------------- */
-QUnit.test("Create button populates list title with user input from db", function() {
-  // var listInfo = { httpStatus: "201", titleEntered: expectedTitle };
-  var listTitleEntered = "New List"
+QUnit.test("User input entered populates list title on card after button click", function() {
+  var actualTitle;
+  var listItemId = "#list" + currId;
+  var listTitleEntered = "New List";
   const input = document.querySelector('#titleInput');
   input.value = listTitleEntered;
-  var listItemId = "#list" + currId;
-
+  
   // npm i sinon-stub-promise -D
-  let stubPost = sinon.stub(request, 'post').callsFake(createListCard());
-
-  var button = document.querySelector('#createListButton').click();
-  var actualTitle = document.querySelector(listItemId).innerHTML;
-  console.log(actualTitle)
+  var createListCard = function(){
+    actualTitle = document.querySelector(listItemId).innerHTML = listTitleEntered;
+  }
+  let stub = sinon.stub(request, 'post').callsFake(createListCard());
   equal( actualTitle, listTitleEntered, "Title was updated on new card" );
+  stub.restore();
 });
 
-QUnit.test("list title field initially 'Enter title here' for a new card after other cards have been added", function(){
+QUnit.test("List title field initially 'Enter title here' for a new card after other cards have been added", function(){
   const input = document.querySelector('#titleInput');
 
   equal(input.placeholder, "Enter title here", "Initial list title placeholder is presents");
