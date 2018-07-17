@@ -1,8 +1,7 @@
 "use strict";
- let createListCard;
-
+var card = 
 {
-  createListCard = function (newCardId, newTitle) {
+  createListCard : function (newCardId, newTitle) {
 
     let todoCard = `
     <div class="grid-x grid-padding-x">
@@ -58,7 +57,5 @@
 
     $("body").append(todoCard);
     currId++;
-    
-  };
-  
+  }
   }

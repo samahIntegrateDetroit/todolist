@@ -4,7 +4,7 @@ var currId = firstId;
 // var getHttpStatus(){
 //   return request.body.;
 // }
-var request = { post: function (data, url, successCallback, failureCallback){
+var request = { post: function (data, url, successCallback){
   
   return fetch(
     url,
@@ -16,19 +16,15 @@ var request = { post: function (data, url, successCallback, failureCallback){
       body: JSON.stringify(data),
       method: 'POST', })
       .then(data => {
-        // if (data.status == 201) {
-          
-        //   } else {
-        //   failureCallback("sorry")
-        // }
-        //var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
-        // var requestStatus = data.status;
-        data.json()
-        .then(jsonData => {
-          var updatedTitle = jsonData.title
-          if (data.status == 201) {
+        if (data.status == 201) {
+          console.log(data);
+          data.json().then(jsonData => {
+          console.log(jsonData);
+            var updatedTitle = jsonData.title;
             successCallback(currId, updatedTitle)
-          }
-        })
+          })
+        }
+        // var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
+        // var requestStatus = data.status;
       })
 }}
