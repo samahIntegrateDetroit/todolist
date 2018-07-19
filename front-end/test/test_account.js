@@ -18,3 +18,22 @@ QUnit.test("Missmatched passwords disables submit button", function(){
     
     equal(pass_tooltip_status, "true", "Validated Password Tooltip is visible");
   });
+
+  QUnit.test("Matched passwords hides tool tip", function(){
+    document.getElementById('passwordOne').value = "testpass1";
+    document.getElementById('passwordTwo').value = "testpass1";
+    validate_passwords();
+    var foundation_tooltip_id = "#"+$('#passwordTwo').attr('data-yeti-box');
+    var pass_tooltip_status = $(foundation_tooltip_id).attr('data-is-active');
+    
+    equal(pass_tooltip_status, "false", "Validated Password Tooltip is not visible");
+  });
+
+  QUnit.test("Matched passwords enables submit button", function(){
+    document.getElementById('passwordOne').value = "testpass1";
+    document.getElementById('passwordTwo').value = "testpass1";
+    
+    validate_passwords();
+    var submit_button_state = document.getElementById( "sign-up-button" ).disabled;
+    equal(submit_button_state, false, "Validated Submit Button is enabled");
+  });

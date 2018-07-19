@@ -16,7 +16,7 @@
   <script defer src="js/app.js"></script>
   <!-- <script defer src="js/vendor/card.js"></script> -->
   <script src="./api.js"></script>
-  <script src="./button.js"></script>
+  <!-- <script src="./button.js"></script> -->
   <script src="./js/vendor/account.js"></script>
 </head>
 
@@ -58,11 +58,11 @@
       <p class="sign-up-header">Sign Up</p>
     <form class="sign-up-form">
       <label class="sign-up-label">first name: </label>
-      <input type="text" required/>
+      <input type="text" required id="fname"/>
       <label class="sign-up-label">last name: </label>
-      <input type="text" required/>
+      <input type="text" required id="lname"/>
       <label class="sign-up-label">email: </label>
-      <input type="email" required/>
+      <input type="email" required id="eMail"/>
       <label class="sign-up-label">password: </label>
       <input type="password" required id="passwordOne"/>
       <label class="sign-up-label">confirm password: </label>
@@ -71,7 +71,8 @@
       data-disable-hover="true" data-click-open="false"
       onkeyup="validate_passwords();"/>
 
-      <button type="submit" class="secondary button" id="sign-up-button" >Sign up!</button>
+      <button type="submit" class="secondary button" id="sign-up-button" 
+      onclick="create_user();">Sign up!</button>
 
     </form>
   </div>
