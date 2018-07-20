@@ -1,9 +1,12 @@
 const buttonHandler = () => {
   var listTitle = document.querySelector("#titleInput").value
-  request.post({title: listTitle}, "http://localhost:8080/list")
 
-  createListCard(currId, listTitle);
+  request.post({title: listTitle}, "http://localhost:8080/list", createListCard, cback);
   initialize()
+}
+
+function cback(message) {
+  console.log(message);
 }
 
 window.onload = () => {

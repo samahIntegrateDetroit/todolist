@@ -5,54 +5,45 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foundation for Sites</title>
-  <link rel="stylesheet" href="styles/foundation.css">
-  <link rel="stylesheet" href="styles/app.css">
-  <link rel="stylesheet" href="styles/account.css">
-  <link href="resources/AvenirNextCondensed-Regular.ttf">
-  <script defer src="js/vendor/jquery.js"></script>
-  <script defer src="js/vendor/what-input.js"></script>
-  <script defer src="js/vendor/foundation.js"></script>
-  <script defer src="js/app.js"></script>
+  <title>Log In</title>
+  <link rel="stylesheet" href="resources/qunit.css">
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script defer src="../../node_modules/sinon/pkg/sinon.js"></script>
+  <link rel="stylesheet" href="../styles/foundation.css">
+  <link rel="stylesheet" href="../styles/app.css">
+  <link rel="stylesheet" href="../styles/account.css">
+  <link href="../resources/AvenirNextCondensed-Regular.ttf">
+  <script defer src="../js/vendor/jquery.js"></script>
+  <script defer src="../js/vendor/what-input.js"></script>
+  <script defer src="../js/vendor/foundation.js"></script>
+  <script defer src="../js/app.js"></script>
   <!-- <script defer src="js/vendor/card.js"></script> -->
-  <script src="./api.js"></script>
-  <!-- <script src="./button.js"></script> -->
-  <script src="./js/vendor/account.js"></script>
+  <script src="../api.js"></script>
+  <!-- <script src="../button.js"></script> -->
+  <script src="../js/vendor/account.js"></script>
 </head>
 
 <body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
   <div class="mobile-nav-bar title-bar">
     <div class="title-bar-left">
       <button type="button">
-        <img src="./resources/hamburgerMenu.svg">
+        <img src="../resources/hamburgerMenu.svg">
       </button>
       <span class="title-bar-text todoText">ToDo</span>
     </div>
 
     <div class="title-bar-right">
       <button id="addList" type="button" data-open="firstModal">
-        <img src="./resources/plusSign.svg">
+        <img src="../resources/plusSign.svg">
       </button>
 
       <button>
-        <img data-open="secondModal" src="./resources/expandSign.svg">
+        <img data-open="secondModal" src="../resources/expandSign.svg">
       </button>
     </div>
   </div>
-
-
-  <!-- <form>
-      <div class="sign-in-form">
-        <h4 class="text-center">Sign In</h4>
-        <label for="sign-in-form-username">Username</label>
-        <input type="text" class="sign-in-form-username" id="sign-in-form-username">
-        <label for="sign-in-form-password">Password</label>
-        <input type="text" class="sign-in-form-password" id="sign-in-form-password">
-        <button type="submit" class="sign-in-form-button">Sign In</button>
-      </div>
-    </form> -->
-
-
 
   <div class="sign-up" >
       <p class="sign-up-header">Sign Up</p>
@@ -62,7 +53,7 @@
       <label class="sign-up-label">last name: </label>
       <input type="text" required id="lname"/>
       <label class="sign-up-label">email: </label>
-      <input type="email" required id="eMail"/>
+      <input type="email" required id="email"/>
       <label class="sign-up-label">password: </label>
       <input type="password" required id="passwordOne"/>
       <label class="sign-up-label">confirm password: </label>
@@ -71,11 +62,14 @@
       data-disable-hover="true" data-click-open="false"
       onkeyup="validate_passwords();"/>
 
-      <button type="submit" class="secondary button" id="sign-up-button" 
-      onclick="create_user();">Sign up!</button>
+      <button type="submit" class="secondary button" id="sign-up-button" >Sign up!</button>
 
     </form>
   </div>
+  <script src="resources/qunit.js"></script>
+  <script src="resources/saucelabs.js"></script>
+<!-- ADD YOUR TEST SCRIPTS HERE -->    
+  <script src="test_account.js"></script>
 </body>
 
 </html>
