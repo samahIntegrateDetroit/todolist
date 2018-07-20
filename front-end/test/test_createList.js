@@ -25,14 +25,14 @@ QUnit.test("Create button populates list title with user input from db", functio
   var postStub = sinon.stub( request, "post" ).returns( listInfo );
 
   const input = document.querySelector('#titleInput');
-  var expectedTitle = "this is the updated title";
+  var expectedTitle = "totally different string";
   input.value = expectedTitle;
 
   var button = document.querySelector('#createListButton').click();
   var listItemId = "#list" + (currId - 1);
   var actualTitle = document.querySelector(listItemId).innerHTML;
   equal( actualTitle, expectedTitle, "Title was updated on new card" );
-
+  postStub.restore();
 });
 
 QUnit.test("list title field initially 'Enter title here' for a new card after other cards have been added", function(){
@@ -50,9 +50,12 @@ QUnit.test("Status 304 is present on unsuccessful list creation", function() {
   var expectedTitle = "this is the updated title";
   input.value = expectedTitle;
 
+  var expectedId = currId;
+
   var button = document.querySelector('#createListButton').click();
   var listItemId = "#list" + (currId - 1);
-  var actualTitle = document.querySelector(listItemId).innerHTML;
-  equal( actualTitle, expectedTitle, "Title was updated on new card" );
+  equal( currId, expectedId, "Card ID was not incremented.");
+  
+  
 
 });

@@ -18,7 +18,7 @@ var request = { post: function (data, url){
         data.json().then(jsonData => {
           var updatedTitle = jsonData.title
           var listInfo = {"httpStatus": requestStatus, "updatedTitle": updatedTitle }
-          // console.log(listInfo)          
+          console.log(listInfo)          
           return listInfo
         })
     })
