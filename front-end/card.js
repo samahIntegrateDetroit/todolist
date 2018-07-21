@@ -1,8 +1,6 @@
-"use strict";
- let createListCard;
 
-{
-  createListCard = function (newCardId, newTitle) {
+var card = {
+  createListCard: function (newCardId, newTitle) {
 
     let todoCard = `
     <div class="grid-x grid-padding-x">
@@ -10,8 +8,9 @@
     
         <div class="card card-tabs large-6">
     
-            <div class="card-section">
-              <h6 id="list${newCardId}" class="listCardTitle">${newTitle}</h6>
+            <div class="card-divider">
+              <h6 id="list${newCardId} class="listCardTitle">${newTitle} </h6>
+    
               <ul class="dropdown menu" data-dropdown-menu>
               <li class="is-dropdown-submenu-parent">
                   <a href="#">
@@ -57,6 +56,6 @@
     $("body").append(todoCard);
     currId++;
     
-  };
-  
   }
+
+}

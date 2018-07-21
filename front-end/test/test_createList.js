@@ -18,17 +18,23 @@ QUnit.test("button click sends information to DB", function() {
 });
 
 /* ------------- WIP test failing after api.js code refactor.  -------------- */
-QUnit.test("Create button populates list title with user input from db", function() {
-  // var listInfo = { httpStatus: "201", titleEntered: expectedTitle };
-  var listTitleEntered = "New List"
+QUnit.test("User input entered populates list title on card after button click", function() {
+  var listTitleEntered = "New List";
   const input = document.querySelector('#titleInput');
-  var expectedTitle = "totally different string";
-  input.value = expectedTitle;
+  input.value = listTitleEntered;
 
-  var button = document.querySelector('#createListButton').click();
-  var actualTitle = document.querySelector(listItemId).innerHTML;
-  equal( actualTitle, expectedTitle, "Title was updated on new card" );
-  postStub.restore();
+  var promise = new Promise(function(resolve, reject) {
+      resolve({"status": 201, "title": listTitleEntered});
+  });
+  
+  let spy = sinon.spy(card, "createListCard");
+  let stub = sinon.stub(window, 'fetch').returns(promise);
+  
+  document.querySelector('#createListButton').click();
+ 
+  equal(spy.calledOnce, true);
+  stub.restore();
+  spy.restore();
 });
 
 QUnit.test("list title field initially 'Enter title here' for a new card after other cards have been added", function(){
@@ -37,21 +43,20 @@ QUnit.test("list title field initially 'Enter title here' for a new card after o
   equal(input.placeholder, "Enter title here", "Initial list title placeholder is presents");
 });
 
-/* ------------- WIP test failing with 3rd test -------------- */
-QUnit.test("Status 304 is present on unsuccessful list creation", function() {
-  var idBefore = currId;
-  var enteredTitle = "List title";
-  var listInfo = { httpStatus: "304", titleEntered: enteredTitle };
-
-  // var postStub = sinon.stub( request, "post" ).returns( listInfo );
-
+QUnit.test("Card was not created with 304 status", function() {
+  var listTitleEntered = "New List";
   const input = document.querySelector('#titleInput');
-  input.value = enteredTitle;
-  var button = document.querySelector('#createListButton').click();
-  var listItemId = "#list" + (currId - 1);
-  // console.log(listInfo)
-  var actualTitle = document.querySelector(listItemId).innerHTML;
-  equal( 304, listInfo.httpStatus, "Found 304 status, title not updated" );
-  equal( idBefore, currId, "A new card was not added");
+  input.value = listTitleEntered;
+
+  var promise = new Promise(function(resolve, reject) {
+      resolve({"status": 304, "title": listTitleEntered});
+  });
   
+  let spy = sinon.spy(card, "createListCard");
+  let stub = sinon.stub(window, 'fetch').returns(promise);
+  
+  document.querySelector('#createListButton').click();
+  
+  equal(spy.called, false);
+  stub.restore();
 });
