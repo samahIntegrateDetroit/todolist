@@ -26,46 +26,60 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture">
-  <div class="mobile-nav-bar title-bar">
-    <div class="title-bar-left">
-      <button type="button">
-        <img src="../resources/hamburgerMenu.svg">
-      </button>
-      <span class="title-bar-text todoText">ToDo</span>
-    </div>
-
-    <div class="title-bar-right">
-      <button id="addList" type="button" data-open="firstModal">
-        <img src="../resources/plusSign.svg">
-      </button>
-
-      <button>
-        <img data-open="secondModal" src="../resources/expandSign.svg">
-      </button>
-    </div>
-  </div>
-
-  <div class="sign-up" >
-      <p class="sign-up-header">Sign Up</p>
-    <form class="sign-up-form">
-      <label class="sign-up-label">first name: </label>
-      <input type="text" required id="fname"/>
-      <label class="sign-up-label">last name: </label>
-      <input type="text" required id="lname"/>
-      <label class="sign-up-label">email: </label>
-      <input type="email" required id="email"/>
-      <label class="sign-up-label">password: </label>
-      <input type="password" required id="passwordOne"/>
-      <label class="sign-up-label">confirm password: </label>
-      <input type="password" required id="passwordTwo" title="Passwords dont match!"
-      data-tooltip class="has-tip right" 
-      data-disable-hover="true" data-click-open="false"
-      onkeyup="validate_passwords();"/>
-
-      <button type="submit" class="secondary button" id="sign-up-button" >Sign up!</button>
-
-    </form>
-  </div>
+      <div class="mobile-nav-bar title-bar">
+          <div class="title-bar-left">
+            <button type="button">
+              <img src="./resources/hamburgerMenu.svg">
+            </button>
+            <span class="title-bar-text todoText">ToDo</span>
+          </div>
+      
+          <div class="title-bar-right">
+            <button id="addList" type="button" data-open="firstModal">
+              <img src="./resources/plusSign.svg">
+            </button>
+      
+            <button>
+              <img data-open="secondModal" src="./resources/expandSign.svg">
+            </button>
+          </div>
+        </div>
+      
+      
+        <!-- <form>
+            <div class="sign-in-form">
+              <h4 class="text-center">Sign In</h4>
+              <label for="sign-in-form-username">Username</label>
+              <input type="text" class="sign-in-form-username" id="sign-in-form-username">
+              <label for="sign-in-form-password">Password</label>
+              <input type="text" class="sign-in-form-password" id="sign-in-form-password">
+              <button type="submit" class="sign-in-form-button">Sign In</button>
+            </div>
+          </form> -->
+      
+      
+      
+        <div class="sign-up" >
+            <p class="sign-up-header">Sign Up</p>
+          <form class="sign-up-form" onsubmit="create_user();">
+            <label class="sign-up-label">first name: </label>
+            <input type="text" required id="fname"/>
+            <label class="sign-up-label">last name: </label>
+            <input type="text" required id="lname"/>
+            <label class="sign-up-label">email: </label>
+            <input type="email" required id="eMail"/>
+            <label class="sign-up-label">password: </label>
+            <input type="password" required id="passwordOne"/>
+            <label class="sign-up-label">confirm password: </label>
+            <input type="password" required id="passwordTwo" title="Passwords dont match!"
+            data-tooltip class="has-tip right" 
+            data-disable-hover="true" data-click-open="false"
+            onkeyup="validate_passwords();"/>
+      
+            <button type="submit" class="secondary button" id="sign-up-button" >Sign up!</button>
+      
+          </form>
+        </div>
   <script src="resources/qunit.js"></script>
   <script src="resources/saucelabs.js"></script>
 <!-- ADD YOUR TEST SCRIPTS HERE -->    

@@ -37,3 +37,89 @@ QUnit.test("Missmatched passwords disables submit button", function(){
     var submit_button_state = document.getElementById( "sign-up-button" ).disabled;
     equal(submit_button_state, false, "Validated Submit Button is enabled");
   });
+
+  QUnit.test("Submit Button sends to database", function(){
+    var fname = "fname1";
+    var lname = "lname1";
+    var eMail = "email1@email.com";
+    var pass1 = "password1";
+    var pass2 = "password2";
+    var expectedStatus = 201;
+    
+    document.getElementById("fname").value = fname;
+    document.getElementById("lname").value = lname;
+    document.getElementById("eMail").value = eMail;
+    document.getElementById("passwordOne").value = pass1;
+    document.getElementById("passwordTwo").value = pass2;
+    
+  //   var promise = new Promise(function(resolve, reject) {
+  //     resolve({"status": expectedStatus, 
+  //     "firstName": fname,
+  //     "lastName": lname,
+  //     "eMail": eMail,
+  //     "passwordHash": "",
+  //     "signupDate": new Date().getTime(),
+  //     "userID": 99
+  //   });
+  // });
+  
+  let spy = sinon.spy(userrequest, "post");
+  // let stub = sinon.stub(window, 'fetch').returns(promise);
+  
+  document.getElementById( "sign-up-button" ).click();
+  
+  equal(spy.calledOnce, true, "Post request was called once");
+  console.log(spy.args);
+  equal(spy.args[0][0].firstName, fname, "F name was as expected");
+  equal(spy.args[0][0].lastName, lname, "L name was as expected");
+  equal(spy.args[0][0].eMail, eMail, "Email was as expected");
+  equal(spy.args[0][0].paswordHash, pass1, "Password was as expected");
+  ok($.isNumeric( spy.args[0][0].signupDate),"Signup Date is present" );
+  equal(spy.args[0][1], "http://localhost:8080/user", "URL was as exepected");
+  // stub.restore();
+    
+  });
+
+  QUnit.test("Status 201 redirects to index.html", function(){
+    var fname = "fname1";
+    var lname = "lname1";
+    var eMail = "email1@email.com1";
+    var pass1 = "password1";
+    var pass2 = "password2";
+    var expectedStatus = 201;
+    
+    document.getElementById("fname").value = fname;
+    document.getElementById("lname").value = lname;
+    document.getElementById("eMail").value = eMail;
+    document.getElementById("passwordOne").value = pass1;
+    document.getElementById("passwordTwo").value = pass2;
+    
+    var promise = new Promise(function(resolve, reject) {
+      resolve({"status": expectedStatus, 
+      "firstName": fname,
+      "lastName": lname,
+      "eMail": eMail,
+      "passwordHash": "",
+      "signupDate": new Date().getTime(),
+      "userID": 99
+    });
+  });
+  
+  //let spy = sinon.spy(userRedirect, "redirectToIndex");
+  let stub1 = sinon.stub(window, 'fetch').returns(promise);
+  let stub2 = sinon.stub(userRedirect, "redirectToIndex").callsFake(function (){alert("stub fake");});
+  
+  document.getElementById( "sign-up-button" ).click();
+  
+  equal(stub2.calledOnce, true, "Redirect to Index was called once");
+  console.log("Stub2 :"+stub2.args);
+  // equal(spy.args[0][0].firstName, fname, "F name was as expected");
+  // equal(spy.args[0][0].lastName, lname, "L name was as expected");
+  // equal(spy.args[0][0].eMail, eMail, "Email was as expected");
+  // equal(spy.args[0][0].paswordHash, pass1, "Password was as expected");
+  // ok($.isNumeric( spy.args[0][0].signupDate),"Signup Date is present" );
+  // equal(spy.args[0][1], "http://localhost:8080/user", "URL was as exepected");
+  stub1.restore();
+  stub2.restore();
+
+  });
