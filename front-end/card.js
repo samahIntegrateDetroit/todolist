@@ -1,5 +1,6 @@
 
 var card = {
+
   createListCard: function (newCardId, newTitle) {
 
     let todoCard = `
@@ -55,7 +56,7 @@ var card = {
 
     $("body").append(todoCard);
     currId++;
-    
+
   }
 
-}
+};

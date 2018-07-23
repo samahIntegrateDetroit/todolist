@@ -1,30 +1,34 @@
-// var firstId = 0;
-// var currId = firstId;
-// var httpStatus;
-// var getHttpStatus(){
-//   return request.body.;
-// }
-// var request = { post: function (data, url, successCallback, failureCallback){
-  
-//   return fetch(
-//     url,
-//     {
-//       headers: { 
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json' 
-//       },
-//       body: JSON.stringify(data),
-//       method: 'POST'
-//     }).then( data => data.json())
-//       .then(jsonData => {
-//         var updatedTitle = jsonData.title
-//         console.log("outside If")
-//         if (data.status == 201) {
-//           console.log("inside If")
-//           successCallback(currId, updatedTitle)
-//         }
-//     }).catch(console.log)
-// }}
+var firstId = 0;
+var currId = firstId;
+
+var request = {
+  post: function (data, url, successCallback, failureCallback)
+  {
+    fetch(
+        url,
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data),
+          method: 'POST'
+        })
+    .then(
+        function(data) {
+          console.log("DATA = ", data);
+          if (data.status == 201) {
+            successCallback(currId, data.title);
+          }
+          else if (data.status == 304) {
+          }
+        },
+        function(error) {
+          console.log("ERROR = ", error);
+        });
+
+   }
+  }
 
 var userrequest = { post: function (data, url){
 
