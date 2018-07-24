@@ -26,6 +26,11 @@
 //     }).catch(console.log)
 // }}
 
+var redirect = { redirectToPage: function (url) {
+  alert('inside redirect');
+  //$(location).attr('href', url)
+}}
+
 var userrequest = { post: function (data, url){
 
   fetch(
@@ -42,7 +47,7 @@ var userrequest = { post: function (data, url){
       console.log(response)          
       //return response;
       if(response.status==201){
-        userRedirect.redirectToIndex();
+        redirect.redirectToPage("index.html");
       }else{
         alert('bad response status');
       }
@@ -50,6 +55,4 @@ var userrequest = { post: function (data, url){
 }
 }
 
-var userRedirect = { redirectToIndex: function() {
-  $(location).attr('href', 'index.html')
-}}
+

@@ -14,8 +14,13 @@ var password2 = document.getElementById("passwordTwo");
 
 }
 
-function create_user(){
+function submit_click(){
     event.preventDefault();
+    create_user();
+}
+
+function create_user(){
+    
     var fname = document.getElementById("fname").value;
     var lname = document.getElementById("lname").value;
     var eMail = document.getElementById("eMail").value;
@@ -30,7 +35,7 @@ function create_user(){
         paswordHash: password1 ,
         signupDate: signupDate 
       }
-      console.log(JSON.stringify(data));
+      //console.log(JSON.stringify(data));
       userrequest.post(data, "http://localhost:8080/user");
 }
 
