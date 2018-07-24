@@ -23,6 +23,7 @@ QUnit.test("User input entered populates list title on card after button click",
   var done = assert.async();
   card.called = false;
   console.log("TOP");
+  currId = 9909;
   var listTitleEntered = "New List";
   const input = document.querySelector('#titleInput');
   input.value = listTitleEntered;
@@ -44,6 +45,8 @@ QUnit.test("User input entered populates list title on card after button click",
 
   setTimeout(function() {
     equal(spy.called, true);
+    equal(spy.calledWithExactly(9909, listTitleEntered), true);
+    currId = 0;
     stub.restore();
     spy.restore();
     done();
