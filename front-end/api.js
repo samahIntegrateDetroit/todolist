@@ -31,8 +31,7 @@ var request = {
   }
 
 var redirect = { redirectToPage: function (url) {
-  alert('inside redirect');
-  //$(location).attr('href', url)
+    $(location).attr('href', url)
 }}
 
 var userrequest = { post: function (data, url){
@@ -52,8 +51,10 @@ var userrequest = { post: function (data, url){
       //return response;
       if(response.status==201){
         redirect.redirectToPage("index.html");
+      }else if(response.status==204){
+        alert('User already exists');
       }else{
-        alert('bad response status');
+        alert('A problem occured, Please try again later.');
       }
     })
 }

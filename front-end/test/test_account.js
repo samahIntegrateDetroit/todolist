@@ -80,7 +80,9 @@ QUnit.test("Missmatched passwords disables submit button", function(){
     
   });
 
-  QUnit.test("Status 201 redirects to index.html", function(){
+  QUnit.test("Status 201 redirects to index.html", function(assert){
+
+    var done = assert.async();
     var fname = "fname1";
     var lname = "lname1";
     var eMail = "email1@email.com123";
@@ -109,15 +111,102 @@ QUnit.test("Missmatched passwords disables submit button", function(){
   let stub1 = sinon.stub(window,"fetch").returns(promise);
   let stub2 = sinon.stub(redirect);
   
-  //document.getElementById( "sign-up-button" ).click();
-  create_user();
-  //setTimeout(function (){
-  console.log(stub2.redirectToPage);
+  document.getElementById( "sign-up-button" ).click();
+  
+  setTimeout(function() {
+    console.log(stub2);
+    equal(stub2.redirectToPage.calledOnce, true, "Redirect was called once");
+    equal(stub2.redirectToPage.args[0], "index.html", "Redirect was called with 'Index.html'");
+    stub1.restore();
+    //stub2.restore();
+    done();
+  });
+  });
 
-  equal(stub2.calledOnce, true, "Redirect was called once");
-  equal(stub2.args[0], "index.html", "Redirect was called with 'Index.html'");
-  //},1000);
-  stub1.restore();
-  stub2.restore();
+  QUnit.test("Status 204 pops 'user already exists' alert", function(assert){
 
+    var done = assert.async();
+    var fname = "fname1";
+    var lname = "lname1";
+    var eMail = "email1@email.com";
+    var pass1 = "password1";
+    var pass2 = "password2";
+    var httpStatus = 204;
+    
+    document.getElementById("fname").value = fname;
+    document.getElementById("lname").value = lname;
+    document.getElementById("eMail").value = eMail;
+    document.getElementById("passwordOne").value = pass1;
+    document.getElementById("passwordTwo").value = pass2;
+    
+    var promise = new Promise(function(resolve, reject) {
+      resolve({"status": httpStatus, 
+      "firstName": fname,
+      "lastName": lname,
+      "eMail": eMail,
+      "passwordHash": pass1,
+      "signupDate": new Date().getTime(),
+      "userID": 99
+    });
+  });
+  
+  //let spy = sinon.spy(userRedirect, "redirectToIndex");
+  let stub1 = sinon.stub(window,"fetch").returns(promise);
+  let stub2 = sinon.stub(window,"alert");
+  stub2.withArgs('User already exists');
+  
+  document.getElementById( "sign-up-button" ).click();
+  
+  setTimeout(function() {
+    console.log(stub2);
+    equal(stub2.calledOnce, true, "Alert was thrown once");
+    stub1.restore();
+    stub2.restore();
+    done();
+  });
+
+
+  });
+
+  QUnit.test("Status other than 201 or 204 pops 'try again later' alert", function(assert){
+
+    var done = assert.async();
+    var fname = "fname1";
+    var lname = "lname1";
+    var eMail = "email1@email.com";
+    var pass1 = "password1";
+    var pass2 = "password2";
+    var httpStatus = 304;
+    
+    document.getElementById("fname").value = fname;
+    document.getElementById("lname").value = lname;
+    document.getElementById("eMail").value = eMail;
+    document.getElementById("passwordOne").value = pass1;
+    document.getElementById("passwordTwo").value = pass2;
+    
+    var promise = new Promise(function(resolve, reject) {
+      resolve({"status": httpStatus, 
+      "firstName": fname,
+      "lastName": lname,
+      "eMail": eMail,
+      "passwordHash": pass1,
+      "signupDate": new Date().getTime(),
+      "userID": 99
+    });
+  });
+  
+  //let spy = sinon.spy(userRedirect, "redirectToIndex");
+  let stub1 = sinon.stub(window,"fetch").returns(promise);
+  let stub2 = sinon.stub(window,"alert");
+  stub2.withArgs('A problem occured, Please try again later.');
+  
+  document.getElementById( "sign-up-button" ).click();
+  
+  setTimeout(function() {
+    console.log(stub2);
+    equal(stub2.calledOnce, true, "Alert was thrown once");
+    stub1.restore();
+    stub2.restore();
+    done();
+  });
   });
