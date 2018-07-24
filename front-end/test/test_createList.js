@@ -1,4 +1,5 @@
 
+
 QUnit.test("list title field initially 'Enter title here'", function() {
   const input = document.querySelector('#titleInput');
 
@@ -22,31 +23,34 @@ QUnit.test("User input entered populates list title on card after button click",
 
   var done = assert.async();
   card.called = false;
-  console.log("TOP");
   currId = 9909;
   var listTitleEntered = "New List";
   const input = document.querySelector('#titleInput');
   input.value = listTitleEntered;
-  console.log("before promise");
 
   var promise = new Promise(function(resolve, reject) {
-      resolve({"status": 201, "title": listTitleEntered});
+    resolve(
+        {
+          status: 201,
+          json() { return new Promise(function(resolve, reject)
+            {
+              resolve ({"title": listTitleEntered });
+              reject();
+            });
+          }
+        }
+    );
+    reject();
   });
-  console.log("after promise");
 
   let spy = sinon.spy(card, "createListCard");
   let stub = sinon.stub(window, 'fetch').returns(promise);
 
-  console.log("after stub");
-
   document.querySelector('#createListButton').click();
 
-  console.log("after click");
-
   setTimeout(function() {
-    equal(spy.called, true);
-    equal(spy.calledWithExactly(9909, listTitleEntered), true);
     currId = 0;
+    equal(spy.calledWithExactly(9909, listTitleEntered), true);
     stub.restore();
     spy.restore();
     done();

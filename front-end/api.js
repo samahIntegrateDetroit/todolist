@@ -17,10 +17,15 @@ var request = {
     .then(
         function(data) {
           console.log("DATA = ", data);
-          if (data.status == 201) {
-            successCallback(currId, data.title);
+          console.log(data.status);
+
+          if (data.status === 201) {
+            data.json().then(function (body) {
+              successCallback(currId, body.title);
+            });
+
           }
-          else if (data.status == 304) {
+          else if (data.status === 304) {
           }
         },
         function(error) {

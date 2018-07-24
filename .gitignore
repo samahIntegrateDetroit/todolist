@@ -168,3 +168,5 @@ target/
 # e2e test
 e2e/node_modules/
 e2e/package-lock.json
+
+.DS_Store

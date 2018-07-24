@@ -2,7 +2,7 @@ const buttonHandler = async () => {
   var listTitle = document.querySelector("#titleInput").value
 
   await request.post({title: listTitle}, "http://localhost:8080/list", card.createListCard, cback);
-  initialize()
+  initialize();
 }
 
 function cback(message) {

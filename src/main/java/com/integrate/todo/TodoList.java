@@ -27,8 +27,6 @@ public class TodoList {
         return this;
     }
 
-    public TodoList(){}
-
     public Integer getListID() {
         return listID;
     }
