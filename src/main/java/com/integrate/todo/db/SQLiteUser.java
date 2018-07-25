@@ -20,38 +20,42 @@ public class SQLiteUser implements DBWrapperUser {
     @Override
     public User createUser(User user) {
 
-        String firstName=user.getFirstName();
-        String lastName=user.getLastName();
-        String eMail=user.geteMail();
-        String passwordHash=user.getPasswordHash();
-        String signupDate=user.getSignupDate();
-        try {
-            Connection connection = dataSource.getConnection();
-            Statement statement = connection.createStatement();
-            statement.execute(
-                    "INSERT INTO User (" +
-                            "FIRST_NAME," +
-                            "LAST_NAME," +
-                            "EMAIL," +
-                            "PASSWORD_HASH," +
-                            "SIGNUP_DATE) VALUES ('" + firstName + "','" +
-                            lastName + "','" +
-                            eMail + "','" +
-                            passwordHash + "','" +
-                            signupDate + "');"
-            );
-            statement.close();
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
-            int id = resultSet.getInt("last_insert_rowid()");
-            user.setUserID(id);
-            connection.close();
-            return user;
+        User userExists = findUserByEmail(user.geteMail());
+        if (userExists.getUserID() == -1) {
+            String firstName=user.getFirstName();
+            String lastName=user.getLastName();
+            String eMail=user.geteMail();
+            String passwordHash=user.getPasswordHash();
+            String signupDate=user.getSignupDate();
+            try {
+                Connection connection = dataSource.getConnection();
+                Statement statement = connection.createStatement();
+                statement.execute(
+                        "INSERT INTO User (" +
+                                "FIRST_NAME," +
+                                "LAST_NAME," +
+                                "EMAIL," +
+                                "PASSWORD_HASH," +
+                                "SIGNUP_DATE) VALUES ('" + firstName + "','" +
+                                lastName + "','" +
+                                eMail + "','" +
+                                passwordHash + "','" +
+                                signupDate + "');"
+                );
+                statement.close();
+                statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
+                int id = resultSet.getInt("last_insert_rowid()");
+                user.setUserID(id);
+                connection.close();
+                return user;
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else {
+            user.setUserID(-1);
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        user.setUserID(-1);
         return user;
     }
 
