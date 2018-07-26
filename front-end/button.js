@@ -13,7 +13,7 @@ window.onload = () => {
   initialize()
   const submitButton = document.querySelector("#createListButton")
   submitButton.addEventListener('click', buttonHandler)
-  const input = document.querySelector('#titleInput');
+  // const input = document.querySelector('#titleInput');
 }
 
 function initialize(){

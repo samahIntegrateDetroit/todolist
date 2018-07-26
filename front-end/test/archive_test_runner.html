@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="resources/qunit.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script defer src="../node_modules/sinon/pkg/sinon.js"></script>
+    <script src="../button.js"></script>
+    <script src="../card.js"></script>
+    <script src="../api.js"></script>
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+
+        <div class="grid-x grid-padding-x">
+            <div class="large-6 large-pull-6 cell">
+            
+                <div class="card card-tabs large-6">
+            
+                  <div class="card-section">
+                    <h6 id="list" class="listCardTitle"> New Title </h6>
+                    <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="is-dropdown-submenu-parent">
+                        <a href="#">
+                            <img src="./resources/iconmonstr-gear-1.svg">
+                        </a>
+                      <ul class="menu vertical">
+                        <li><a href="./index.html">Active Lists</a></li>
+                        <li><a href="./archive.html">Archived Lists</a></li>
+                        <li><a href="#">Collaborations</a></li>
+                        <li><a href="#">Log-In / Create Account</a></li>
+                      </ul>
+                      </li>
+                      </ul>          
+                  </div>
+                
+                <div class="tabs-content" data-tabs-content="collapsing-tabs">
+            
+                  <div class="tabs-panel is-active" id="panel1c">
+                    <div class="card-section">
+                      <h4>Task A</h4>
+                      <p>Due date goes here</p>
+                    </div>
+                  </div>
+            
+                  <div class="tabs-panel" id="panel2c">
+                    <div class="card-section">
+                      <h4>Task B</h4>
+                      <p>It has an easy to override visual style, and has a cat on the bottom.</p>
+                    </div>
+                    </div>
+            
+                  <div class="tabs-panel" id="panel3c">
+                    <div class="card-section">
+                      <h4>Task C</h4>
+                      <p>It has an easy to override visual style, it has an image in the card section.</p>
+                    </div>
+                  </div>
+            
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+    <script src="resources/qunit.js"></script>
+    <script src="resources/saucelabs.js"></script>
+<!-- ADD YOUR TEST SCRIPTS HERE -->    
+    <script src="test_archiveList.js"></script>
+</body>
+</html>

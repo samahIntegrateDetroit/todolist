@@ -10,21 +10,10 @@ var card = {
         <div class="card card-tabs large-6">
     
             <div class="card-divider">
-              <h6 id="list${newCardId} class="listCardTitle">${newTitle} </h6>
-    
-              <ul class="dropdown menu" data-dropdown-menu>
-              <li class="is-dropdown-submenu-parent">
-                  <a href="#">
+              <h6 id="list${newCardId}" class="listCardTitle">${newTitle} </h6>
+                  <button href="#" data-close data-reveal-id="archiveModal" class="secondary button" id="archiveModal" type="submit">Archive List
                       <img src="./resources/iconmonstr-gear-1.svg">
-                  </a>
-                <ul class="menu vertical">
-                  <li><a href="./index.html">Active Lists</a></li>
-                  <li><a href="./archive.html">Archived Lists</a></li>
-                  <li><a href="#">Collaborations</a></li>
-                  <li><a href="#">Log-In / Create Account</a></li>
-                </ul>
-                </li>
-                </ul>          
+                  </button>
             </div>
         
             <div class="tabs-content" data-tabs-content="collapsing-tabs">

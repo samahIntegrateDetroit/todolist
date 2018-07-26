@@ -23,10 +23,21 @@
 <body>
   <div class="mobile-nav-bar title-bar">
     <div class="title-bar-left">
-      <button type="button">
-        <img src="./resources/hamburgerMenu.svg">
-      </button>
-      <span class="title-bar-text todoText">ToDo</span>
+
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="is-dropdown-submenu-parent">
+                <a href="#">
+                    <img src="./resources/hamburgerMenu.svg">ToDo
+                </a>
+              <ul class="menu">
+                <li><a href="./index.html">Active Lists</a></li>
+                <li><a href="./archive.html">Archived Lists</a></li>
+                <li><a href="#">Collaborations</a></li>
+                <li><a href="./account.html">Log-In / Create Account</a></li>
+              </ul>
+              </li>
+         </ul>
+
     </div>
 
     <div class="title-bar-right">

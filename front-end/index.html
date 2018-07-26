@@ -37,10 +37,8 @@
                 <li><a href="./account.html">Log-In / Create Account</a></li>
               </ul>
               </li>
-              </ul>
-            
-    
-          </div>
+         </ul>
+    </div>
 
     <div class="title-bar-right">
       <button id="addList" type="button" data-open="firstModal">
@@ -63,54 +61,16 @@
     </center>
   </div>
 
-  <div class="grid-x grid-padding-x">
-    <div class="large-6 large-pull-6 cell">
-    
-        <div class="card card-tabs large-6">
-    
-            <div class="card-section">
-              <h6 id="list" class="listCardTitle"> New Title </h6>
-              <ul class="dropdown menu" data-dropdown-menu>
-              <li class="is-dropdown-submenu-parent">
-                  <a href="#">
-                      <img src="./resources/iconmonstr-gear-1.svg">
-                  </a>
-                <ul class="menu vertical">
-                  <li><a href="./index.html">Active Lists</a></li>
-                  <li><a href="./archive.html">Archived Lists</a></li>
-                  <li><a href="#">Collaborations</a></li>
-                  <li><a href="#">Log-In / Create Account</a></li>
-                </ul>
-                </li>
-                </ul>          
-            </div>
-        
-            <div class="tabs-content" data-tabs-content="collapsing-tabs">
-        
-              <div class="tabs-panel is-active" id="panel1c">
-                <div class="card-section">
-                  <h4>Task A</h4>
-                  <p>Due date goes here</p>
-                </div>
-              </div>
-        
-              <div class="tabs-panel" id="panel2c">
-                <div class="card-section">
-                  <h4>Task B</h4>
-                  <p>It has an easy to override visual style, and has a cat on the bottom.</p>
-                </div>
-                </div>
-        
-              <div class="tabs-panel" id="panel3c">
-                <div class="card-section">
-                  <h4>Task C</h4>
-                  <p>It has an easy to override visual style, it has an image in the card section.</p>
-                </div>
-              </div>
-        
-            </div>
-        </div>
-        </div>
+<!-- WIP modal for archive list-->
+  <div id="archiveModal" class="reveal reveal-modal" data-reveal aria-labelledby="archiveModalList" aria-hidden="true" role="dialog">
+      <div>
+        <h2 id="archiveModalList">List title:&nbsp; </h2>
+        <input id="titleInput" type="text">
+      </div>
+      <center>
+        <button href="#" data-close data-reveal-id="archiveModal" class="secondary button" id="archiveListButton" type="submit">Archive List</button>
+      </center>
+    </div>
   
 <!-- WIP -->
   <div id="listCreationFailureModal" class="reveal reveal-modal" data-reveal aria-labelledby="listCreationFailureModalTitle" aria-hidden="true" role="dialog">
